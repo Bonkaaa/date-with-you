@@ -1,12 +1,11 @@
 // ---------- Application State ----------
-const now = new Date();
 const AppState = {
   step: 1,
   food: null,
   date: null,
   time: null,
-  calMonth: now.getMonth(),
-  calYear: now.getFullYear(),
+  calMonth: 5, // June (0-indexed)
+  calYear: 2026,
 };
 
 // ---------- DOM References ----------
@@ -54,9 +53,6 @@ const TIME_SLOTS = [
   "7:30 PM",
   "8:00 PM",
   "8:30 PM",
-  "9:00 PM",
-  "9:30 PM",
-  "10:00 PM",
 ];
 
 const DAYS_SHORT = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -75,18 +71,17 @@ const MONTHS = [
   "December",
 ];
 
-// ---------- Floating Hearts ----------
+// ---------- Floating Hearts Initialization ----------
 function initFloatingHearts() {
   const emojis = ["❤️", "💕", "💖", "✨", "🌸", "💗", "🥰"];
-  heartsContainer.innerHTML = "";
   for (let i = 0; i < 18; i++) {
     const el = document.createElement("span");
     el.className = "heart-float";
     el.textContent = emojis[i % emojis.length];
     el.style.left = Math.random() * 100 + "%";
     el.style.fontSize = 0.8 + Math.random() * 1.2 + "rem";
-    el.style.animationDuration = 8 + Math.random() * 10 + "s";
-    el.style.animationDelay = Math.random() * 8 + "s";
+    el.style.animationDuration = 8 + Math.random() * 12 + "s";
+    el.style.animationDelay = Math.random() * 10 + "s";
     heartsContainer.appendChild(el);
   }
 }
@@ -102,12 +97,10 @@ function goToStep(step) {
     dot.classList.toggle("active", num === step);
     dot.classList.toggle("done", num < step);
   });
-
+  // Scroll to top of card (mobile friendly)
   const card = $("#appCard");
-  if (card) {
-    card.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }
-
+  if (card) card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  // Trigger confetti on final step
   if (step === 4) {
     launchConfetti();
   }
@@ -134,7 +127,7 @@ foodNextBtn.addEventListener("click", () => {
   renderTimes();
 });
 
-// ---------- Calendar Logic ----------
+// ---------- Calendar ----------
 function renderCalendar() {
   const { calMonth, calYear } = AppState;
   calMonthYear.textContent = `${MONTHS[calMonth]} ${calYear}`;
@@ -143,14 +136,15 @@ function renderCalendar() {
   const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
 
   let html = "";
+  // Day labels
   DAYS_SHORT.forEach((d) => {
     html += `<div class="day-label">${d}</div>`;
   });
-
+  // Empty cells before the first day
   for (let i = 0; i < firstDay; i++) {
     html += '<div class="day empty"></div>';
   }
-
+  // Day numbers
   const today = new Date();
   const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
@@ -165,6 +159,7 @@ function renderCalendar() {
 
   calendarGrid.innerHTML = html;
 
+  // Click handlers for selectable days
   calendarGrid.querySelectorAll(".day:not(.empty)").forEach((el) => {
     el.addEventListener("click", () => {
       const dateStr = el.dataset.date;
@@ -234,6 +229,7 @@ dateSetBtn.addEventListener("click", () => {
     dateError.classList.remove("hidden");
     return;
   }
+  // Build confirmation details
   const d = new Date(AppState.date + "T00:00:00");
   const dayName = [
     "Sunday",
@@ -246,10 +242,9 @@ dateSetBtn.addEventListener("click", () => {
   ][d.getDay()];
   const monthName = MONTHS[d.getMonth()];
   const dayNum = d.getDate();
-
   confirmDate.textContent = `${dayName}, ${monthName} ${dayNum}`;
   confirmTime.textContent = AppState.time;
-  confirmFood.textContent = AppState.food || "Delicious Food";
+  confirmFood.textContent = AppState.food || "Pasta";
   goToStep(4);
 });
 
@@ -265,56 +260,53 @@ function launchConfetti() {
     "#fbbf24",
     "#34d399",
     "#f472b6",
+    "#60a5fa",
   ];
-  const emojis = ["❤️", "💕", "✨", "🎉", "🌸", "💖", "🥳"];
+  const emojis = ["❤️", "💕", "✨", "🎉", "🌸", "💖", "🥳", "🎊"];
 
-  for (let i = 0; i < 70; i++) {
+  for (let i = 0; i < 80; i++) {
     const piece = document.createElement("div");
     piece.className = "confetti-piece";
     const isEmoji = Math.random() > 0.5;
     if (isEmoji) {
       piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      piece.style.fontSize = 0.8 + Math.random() * 1 + "rem";
+      piece.style.fontSize = 0.8 + Math.random() * 1.2 + "rem";
+      piece.style.width = "auto";
+      piece.style.height = "auto";
       piece.style.background = "transparent";
     } else {
       piece.style.background =
         colors[Math.floor(Math.random() * colors.length)];
-      piece.style.width = 6 + Math.random() * 8 + "px";
-      piece.style.height = 6 + Math.random() * 8 + "px";
+      piece.style.width = 6 + Math.random() * 10 + "px";
+      piece.style.height = 6 + Math.random() * 10 + "px";
       piece.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
     }
     piece.style.left = Math.random() * 100 + "%";
     piece.style.top = "-20px";
-    piece.style.animationDuration = 1.5 + Math.random() * 2 + "s";
-    piece.style.animationDelay = Math.random() * 1.2 + "s";
+    piece.style.animationDuration = 1.5 + Math.random() * 2.5 + "s";
+    piece.style.animationDelay = Math.random() * 1.5 + "s";
+    piece.style.opacity = 0.7 + Math.random() * 0.3;
     container.appendChild(piece);
   }
 
   setTimeout(() => {
     container.innerHTML = "";
-  }, 4500);
+  }, 5000);
 }
 
-// ---------- Reset App ----------
+// ---------- Reset Everything ----------
 function resetApp() {
   AppState.food = null;
   AppState.date = null;
   AppState.time = null;
-  const current = new Date();
-  AppState.calMonth = current.getMonth();
-  AppState.calYear = current.getFullYear();
-
+  AppState.calMonth = 5;
+  AppState.calYear = 2026;
   foodItems.forEach((el) => el.classList.remove("selected"));
   foodNextBtn.disabled = true;
   foodError.classList.add("hidden");
   dateSetBtn.disabled = true;
   dateError.classList.add("hidden");
   confettiOverlay.innerHTML = "";
-
-  if (noBtnWrapper) {
-    noBtnWrapper.style.transform = "none";
-  }
-
   goToStep(1);
   renderCalendar();
   renderTimes();
@@ -322,23 +314,20 @@ function resetApp() {
 
 resetBtn.addEventListener("click", resetApp);
 
-// ---------- Dynamic Playful "NO" Button ----------
+// ---------- Playful "NO" Button ----------
 let noClickCount = 0;
 const noBtnWrapper = noBtn.closest(".btn-no-wrapper");
+const canHover = window.matchMedia("(hover: hover)").matches;
 
-function dodgeNoButton() {
-  if (!noBtnWrapper) return;
-  const maxX = 60;
-  const maxY = 35;
+noBtn.addEventListener("mouseenter", () => {
+  if (!noBtnWrapper || !canHover) return;
+  const maxX = 120;
+  const maxY = 60;
   const dx = (Math.random() - 0.5) * maxX * 2;
   const dy = (Math.random() - 0.5) * maxY * 2;
   noBtnWrapper.style.transform = `translate(${dx}px, ${dy}px)`;
-}
-
-noBtn.addEventListener("mouseenter", dodgeNoButton);
-noBtn.addEventListener("touchstart", (e) => {
-  e.preventDefault();
-  dodgeNoButton();
+  noBtnWrapper.style.transition =
+    "transform 0.15s cubic-bezier(0.23, 1, 0.32, 1)";
 });
 
 noBtn.addEventListener("click", (e) => {
@@ -356,7 +345,15 @@ noBtn.addEventListener("click", (e) => {
   noMessage.textContent =
     messages[Math.min(noClickCount - 1, messages.length - 1)];
 
-  if (noClickCount > 5) {
+  if (noClickCount > 3) {
+    noBtn.style.transform = "scale(0.7)";
+    noBtn.style.opacity = "0.3";
+    setTimeout(() => {
+      noBtn.style.transform = "scale(1)";
+      noBtn.style.opacity = "1";
+    }, 600);
+  }
+  if (noClickCount > 6) {
     noMessage.textContent = "💖 okay i'm clicking YES for you! 💖";
     setTimeout(() => {
       yesBtn.click();
@@ -373,14 +370,35 @@ yesBtn.addEventListener("click", () => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     const step = AppState.step;
-    if (step === 1) yesBtn.click();
-    else if (step === 2 && !foodNextBtn.disabled) foodNextBtn.click();
-    else if (step === 3 && !dateSetBtn.disabled) dateSetBtn.click();
+    if (step === 1) {
+      yesBtn.click();
+    } else if (step === 2) {
+      if (!foodNextBtn.disabled) foodNextBtn.click();
+    } else if (step === 3) {
+      if (!dateSetBtn.disabled) dateSetBtn.click();
+    }
   }
 });
 
-// ---------- Initialization ----------
+// ---------- Viewport Height Fix for Mobile ----------
+// Mobile browser chrome (address bar) resizing changes 100vh unreliably,
+// so this custom property is used as a fallback ahead of `dvh` support
+// (see the --vh usage in styles.css).
+function adjustViewport() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+}
+adjustViewport();
+window.addEventListener("resize", adjustViewport);
+window.addEventListener("orientationchange", () => {
+  // Fire after the browser finishes rotating and reports the new size.
+  setTimeout(adjustViewport, 150);
+});
+
+// ---------- Final Initialization ----------
 initFloatingHearts();
 renderCalendar();
 renderTimes();
 goToStep(1);
+
+console.log("💕 Made with love for someone special ✨");
