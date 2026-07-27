@@ -1,0 +1,1337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💕 A Date With You</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ── Reset & Base ── */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: #0f0518;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* ── Animated Background ── */
+      .bg-gradient-animated {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background: radial-gradient(
+          ellipse at 20% 50%,
+          #1a0a2e 0%,
+          #0f0518 70%
+        );
+        animation: bgPulse 8s ease-in-out infinite alternate;
+      }
+      @keyframes bgPulse {
+        0% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .bg-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.3;
+        animation: orbFloat 12s ease-in-out infinite alternate;
+      }
+      .bg-orb--pink {
+        width: 500px;
+        height: 500px;
+        background: #ff6b9d;
+        top: -100px;
+        right: -100px;
+      }
+      .bg-orb--purple {
+        width: 400px;
+        height: 400px;
+        background: #8b5cf6;
+        bottom: -80px;
+        left: -80px;
+        animation-delay: 4s;
+      }
+      .bg-orb--gold {
+        width: 300px;
+        height: 300px;
+        background: #ffd700;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation-delay: 8s;
+        opacity: 0.08;
+      }
+      @keyframes orbFloat {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(40px, 30px) scale(1.2);
+        }
+      }
+
+      /* ── Floating Hearts ── */
+      .hearts-container {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .heart-float {
+        position: absolute;
+        font-size: 1.2rem;
+        opacity: 0.15;
+        animation: heartRise linear infinite;
+        user-select: none;
+      }
+      @keyframes heartRise {
+        0% {
+          transform: translateY(100vh) scale(0.6) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.15;
+        }
+        90% {
+          opacity: 0.15;
+        }
+        100% {
+          transform: translateY(-10vh) scale(1.2) rotate(720deg);
+          opacity: 0;
+        }
+      }
+
+      /* ── App Container ── */
+      .app-container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 480px;
+        padding: 16px;
+        margin: 0 auto;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* ── Glass Card ── */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 40px;
+        padding: 36px 28px 32px;
+        width: 100%;
+        box-shadow:
+          0 30px 80px rgba(0, 0, 0, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .glass-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 40px;
+        padding: 1px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 107, 157, 0.3),
+          rgba(139, 92, 246, 0.1)
+        );
+        -webkit-mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+
+      /* ── Pages ── */
+      .page {
+        display: none;
+        animation: pageFadeIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      }
+      .page.active {
+        display: block;
+      }
+
+      @keyframes pageFadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px) scale(0.97);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* ── Typography ── */
+      .font-display {
+        font-family: "Playfair Display", serif;
+      }
+
+      /* ── Buttons ── */
+      .btn-primary {
+        background: linear-gradient(135deg, #ff6b9d, #e8557a);
+        border: none;
+        color: #fff;
+        font-weight: 600;
+        padding: 14px 32px;
+        border-radius: 60px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow: 0 8px 30px rgba(255, 107, 157, 0.35);
+        letter-spacing: 0.3px;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 12px 40px rgba(255, 107, 157, 0.5);
+      }
+      .btn-primary:active {
+        transform: scale(0.96);
+      }
+      .btn-primary::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 60px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.15),
+          transparent
+        );
+        pointer-events: none;
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #fff;
+        font-weight: 500;
+        padding: 14px 32px;
+        border-radius: 60px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        backdrop-filter: blur(8px);
+      }
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(-2px);
+      }
+
+      .btn-no {
+        background: rgba(255, 70, 70, 0.15);
+        border: 1px solid rgba(255, 70, 70, 0.25);
+        color: #ff6b6b;
+        font-weight: 600;
+        padding: 14px 32px;
+        border-radius: 60px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+      }
+      .btn-no:hover {
+        background: rgba(255, 70, 70, 0.25);
+        transform: scale(0.95);
+      }
+
+      /* ── Food Grid ── */
+      .food-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .food-item {
+        background: rgba(255, 255, 255, 0.04);
+        border: 2px solid rgba(255, 255, 255, 0.06);
+        border-radius: 20px;
+        padding: 16px 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .food-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+      }
+      .food-item.selected {
+        border-color: #ff6b9d;
+        background: rgba(255, 107, 157, 0.15);
+        box-shadow: 0 0 30px rgba(255, 107, 157, 0.15);
+        color: #fff;
+        transform: scale(1.02);
+      }
+      .food-item .emoji {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 4px;
+      }
+      .food-item .label {
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+      }
+
+      /* ── Calendar ── */
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+      }
+      .calendar-grid .day-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.3);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        padding: 6px 0;
+        text-align: center;
+      }
+      .calendar-grid .day {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .calendar-grid .day:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+      }
+      .calendar-grid .day.selected {
+        background: linear-gradient(135deg, #ff6b9d, #e8557a);
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(255, 107, 157, 0.35);
+        transform: scale(1.05);
+      }
+      .calendar-grid .day.empty {
+        cursor: default;
+        background: transparent;
+      }
+      .calendar-grid .day.empty:hover {
+        background: transparent;
+      }
+
+      .calendar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      .calendar-header .month-year {
+        font-weight: 600;
+        font-size: 1rem;
+        color: #fff;
+      }
+      .calendar-header .nav-btn {
+        background: rgba(255, 255, 255, 0.06);
+        border: none;
+        color: rgba(255, 255, 255, 0.5);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.25s;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .calendar-header .nav-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+      }
+
+      /* ── Time Grid ── */
+      .time-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .time-item {
+        background: rgba(255, 255, 255, 0.04);
+        border: 2px solid rgba(255, 255, 255, 0.06);
+        border-radius: 14px;
+        padding: 10px 6px;
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .time-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+      }
+      .time-item.selected {
+        border-color: #ff6b9d;
+        background: rgba(255, 107, 157, 0.15);
+        color: #fff;
+        box-shadow: 0 0 20px rgba(255, 107, 157, 0.12);
+      }
+
+      /* ── Confetti ── */
+      .confetti-container {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .confetti-piece {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        opacity: 0;
+        animation: confettiFall linear forwards;
+      }
+      @keyframes confettiFall {
+        0% {
+          opacity: 1;
+          transform: translateY(-20px) rotate(0deg) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(110vh) rotate(720deg) scale(0.3);
+        }
+      }
+
+      /* ── Playful "NO" button ── */
+      .btn-no-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+      .btn-no-wrapper .btn-no {
+        transition: all 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 420px) {
+        .glass-card {
+          padding: 28px 18px 24px;
+          border-radius: 28px;
+        }
+        .food-grid {
+          gap: 8px;
+        }
+        .food-item {
+          padding: 12px 4px;
+          border-radius: 16px;
+        }
+        .food-item .emoji {
+          font-size: 1.6rem;
+        }
+        .food-item .label {
+          font-size: 0.7rem;
+        }
+        .time-grid {
+          gap: 6px;
+        }
+        .time-item {
+          padding: 8px 4px;
+          font-size: 0.7rem;
+          border-radius: 12px;
+        }
+        .calendar-grid .day {
+          font-size: 0.75rem;
+          border-radius: 10px;
+        }
+        .btn-primary,
+        .btn-secondary,
+        .btn-no {
+          padding: 12px 24px;
+          font-size: 0.9rem;
+        }
+        .glass-card h1 {
+          font-size: 1.8rem !important;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .app-container {
+          max-width: 560px;
+          padding: 24px;
+        }
+        .glass-card {
+          padding: 48px 40px 40px;
+          border-radius: 48px;
+        }
+        .food-grid {
+          gap: 16px;
+        }
+        .food-item {
+          padding: 20px 12px;
+          border-radius: 24px;
+        }
+        .food-item .emoji {
+          font-size: 2.4rem;
+        }
+        .food-item .label {
+          font-size: 0.9rem;
+        }
+        .time-grid {
+          gap: 10px;
+        }
+        .time-item {
+          padding: 12px 8px;
+          font-size: 0.9rem;
+          border-radius: 16px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .app-container {
+          max-width: 640px;
+          padding: 32px;
+        }
+        .glass-card {
+          padding: 56px 48px 44px;
+          border-radius: 56px;
+        }
+      }
+
+      /* ── Scrollbar hide ── */
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      * {
+        scrollbar-width: none;
+      }
+
+      /* ── Misc ── */
+      .text-shadow-glow {
+        text-shadow: 0 0 40px rgba(255, 107, 157, 0.3);
+      }
+      .shine {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.05) 0%,
+          transparent 50%,
+          rgba(255, 255, 255, 0.05) 100%
+        );
+      }
+
+      /* Confetti overlay for final page */
+      .confetti-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 5;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      /* Glow ring on confirmation */
+      .glow-ring {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.15;
+        animation: ringPulse 3s ease-in-out infinite alternate;
+      }
+      .glow-ring--pink {
+        width: 300px;
+        height: 300px;
+        background: #ff6b9d;
+        top: -80px;
+        right: -80px;
+      }
+      .glow-ring--purple {
+        width: 200px;
+        height: 200px;
+        background: #8b5cf6;
+        bottom: -60px;
+        left: -60px;
+        animation-delay: 1.5s;
+      }
+      @keyframes ringPulse {
+        0% {
+          opacity: 0.08;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0.2;
+          transform: scale(1.2);
+        }
+      }
+
+      /* Date display on confirmation */
+      .confirmation-detail {
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 16px;
+        padding: 12px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .confirmation-detail .icon {
+        font-size: 1.4rem;
+        width: 36px;
+        text-align: center;
+      }
+      .confirmation-detail .text {
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .confirmation-detail .sub {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* Heartbeat animation for the final heart */
+      .heartbeat {
+        animation: heartbeat 1.4s ease-in-out infinite;
+        display: inline-block;
+      }
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        14% {
+          transform: scale(1.2);
+        }
+        28% {
+          transform: scale(1);
+        }
+        42% {
+          transform: scale(1.15);
+        }
+        56% {
+          transform: scale(1);
+        }
+      }
+
+      /* Floating hearts on confirmation */
+      .confetti-hearts {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        border-radius: 40px;
+      }
+      .confetti-hearts span {
+        position: absolute;
+        font-size: 1.2rem;
+        animation: floatHeart 6s ease-in-out infinite;
+        opacity: 0.1;
+      }
+      @keyframes floatHeart {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg) scale(1);
+          opacity: 0.05;
+        }
+        50% {
+          transform: translateY(-60px) rotate(180deg) scale(1.3);
+          opacity: 0.2;
+        }
+      }
+
+      /* Progress dots */
+      .progress-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .progress-dots .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        transition: all 0.4s ease;
+      }
+      .progress-dots .dot.active {
+        background: #ff6b9d;
+        box-shadow: 0 0 16px rgba(255, 107, 157, 0.4);
+        width: 24px;
+        border-radius: 4px;
+      }
+      .progress-dots .dot.done {
+        background: rgba(255, 107, 157, 0.3);
+      }
+
+      /* Selected food display on confirmation */
+      .food-pill {
+        display: inline-block;
+        background: rgba(255, 107, 157, 0.15);
+        border: 1px solid rgba(255, 107, 157, 0.2);
+        border-radius: 40px;
+        padding: 4px 16px 4px 12px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #fff;
+      }
+      .food-pill .emoji {
+        margin-right: 6px;
+      }
+
+      /* NO button fleeing */
+      .btn-no-flee {
+        transition: all 0.12s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ─── Background ─── -->
+    <div class="bg-gradient-animated"></div>
+    <div class="bg-orb bg-orb--pink"></div>
+    <div class="bg-orb bg-orb--purple"></div>
+    <div class="bg-orb bg-orb--gold"></div>
+
+    <!-- ─── Floating Hearts ─── -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- ─── Confetti Overlay ─── -->
+    <div class="confetti-overlay" id="confettiOverlay"></div>
+
+    <!-- ─── App ─── -->
+    <div class="app-container">
+      <div class="glass-card" id="appCard">
+        <!-- Progress Dots -->
+        <div class="progress-dots" id="progressDots">
+          <span class="dot active" data-step="1"></span>
+          <span class="dot" data-step="2"></span>
+          <span class="dot" data-step="3"></span>
+          <span class="dot" data-step="4"></span>
+        </div>
+
+        <!-- ===== PAGE 1: Question ===== -->
+        <div class="page active" id="page1">
+          <div class="text-center">
+            <div class="text-5xl mb-4">💕</div>
+            <h1
+              class="font-display text-3xl md:text-4xl font-bold text-white mb-3 leading-tight"
+            >
+              Will you go on a<br />date with me?
+            </h1>
+            <p class="text-white/30 text-sm mb-8">✨ be honest ✨</p>
+
+            <div
+              class="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
+              <button class="btn-primary text-lg px-10" id="yesBtn">
+                YES ❤️
+              </button>
+              <div class="btn-no-wrapper">
+                <button class="btn-no text-lg px-8" id="noBtn">NO ❌</button>
+              </div>
+            </div>
+
+            <div
+              id="noMessage"
+              class="mt-6 text-pink-300/70 text-sm font-medium hidden transition-all"
+            >
+              🥺 are you sure? try again... 💕
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== PAGE 2: Food ===== -->
+        <div class="page" id="page2">
+          <div class="text-center mb-6">
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
+              What are we feeling?
+            </h2>
+            <p class="text-white/30 text-sm mt-1">pick your favourite 🍽️</p>
+          </div>
+
+          <div class="food-grid" id="foodGrid">
+            <div class="food-item" data-food="Pizza">
+              <span class="emoji">🍕</span>
+              <span class="label">Pizza</span>
+            </div>
+            <div class="food-item" data-food="Sushi">
+              <span class="emoji">🍣</span>
+              <span class="label">Sushi</span>
+            </div>
+            <div class="food-item" data-food="Burgers">
+              <span class="emoji">🍔</span>
+              <span class="label">Burgers</span>
+            </div>
+            <div class="food-item" data-food="Pasta">
+              <span class="emoji">🍝</span>
+              <span class="label">Pasta</span>
+            </div>
+            <div class="food-item" data-food="Tacos">
+              <span class="emoji">🌮</span>
+              <span class="label">Tacos</span>
+            </div>
+            <div class="food-item" data-food="Ramen">
+              <span class="emoji">🍜</span>
+              <span class="label">Ramen</span>
+            </div>
+          </div>
+
+          <div class="mt-6 text-center">
+            <button class="btn-primary px-12" id="foodNextBtn" disabled>
+              Next 🍴
+            </button>
+            <p id="foodError" class="text-pink-300/50 text-xs mt-2 hidden">
+              pick something delicious first!
+            </p>
+          </div>
+        </div>
+
+        <!-- ===== PAGE 3: Date/Time ===== -->
+        <div class="page" id="page3">
+          <div class="text-center mb-5">
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
+              So... when are you free?
+            </h2>
+            <p class="text-white/30 text-sm mt-1">
+              🎉 pick a day &amp; time 🎉
+            </p>
+          </div>
+
+          <!-- Calendar -->
+          <div class="mb-5">
+            <div class="calendar-header">
+              <button class="nav-btn" id="calPrev">‹</button>
+              <span class="month-year" id="calMonthYear">June 2026</span>
+              <button class="nav-btn" id="calNext">›</button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+              <!-- rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Time -->
+          <div class="mb-5">
+            <p
+              class="text-white/40 text-xs font-medium uppercase tracking-wider mb-2"
+            >
+              Select a time
+            </p>
+            <div class="time-grid" id="timeGrid">
+              <!-- rendered by JS -->
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn-primary px-10" id="dateSetBtn" disabled>
+              Set the date 🎉
+            </button>
+            <p id="dateError" class="text-pink-300/50 text-xs mt-2 hidden">
+              please pick a date and time
+            </p>
+          </div>
+        </div>
+
+        <!-- ===== PAGE 4: Confirmation ===== -->
+        <div class="page" id="page4">
+          <div class="text-center relative">
+            <!-- Glow rings -->
+            <div class="glow-ring glow-ring--pink"></div>
+            <div class="glow-ring glow-ring--purple"></div>
+
+            <div class="relative z-10">
+              <div class="text-5xl md:text-6xl mb-2 heartbeat">💖</div>
+              <h1
+                class="font-display text-4xl md:text-5xl font-bold text-white mb-1 text-shadow-glow"
+              >
+                YAY!!
+              </h1>
+              <p class="text-pink-300/60 text-sm mb-5">✨ it's a date! ✨</p>
+
+              <div class="space-y-2 text-left max-w-xs mx-auto">
+                <div class="confirmation-detail">
+                  <span class="icon">📅</span>
+                  <div>
+                    <div class="text" id="confirmDate">Friday, June 26</div>
+                    <div class="sub">date</div>
+                  </div>
+                </div>
+                <div class="confirmation-detail">
+                  <span class="icon">🕒</span>
+                  <div>
+                    <div class="text" id="confirmTime">8:00 PM</div>
+                    <div class="sub">time</div>
+                  </div>
+                </div>
+                <div class="confirmation-detail">
+                  <span class="icon">🍽️</span>
+                  <div>
+                    <div class="text" id="confirmFood">Pasta</div>
+                    <div class="sub">dinner</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6">
+                <p class="text-white/80 text-lg font-medium">
+                  I can't wait to see you! 🥰✨
+                </p>
+                <p class="text-white/20 text-xs mt-4 italic max-w-xs mx-auto">
+                  normal guys send texts, i made a website on Replit.<br />
+                  i'm not like other guys xx
+                </p>
+              </div>
+
+              <button class="btn-secondary mt-6 text-sm" id="resetBtn">
+                🔄 start over
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── JavaScript ─── -->
+    <script>
+      // ── TypeScript-like state ──
+      const AppState = {
+        step: 1,
+        food: null,
+        date: null,
+        time: null,
+        // calendar state
+        calMonth: 5, // 0-indexed: June = 5
+        calYear: 2026,
+      };
+
+      // ── DOM refs ──
+      const $ = (sel) => document.querySelector(sel);
+      const $$ = (sel) => document.querySelectorAll(sel);
+
+      const pages = {
+        1: $("#page1"),
+        2: $("#page2"),
+        3: $("#page3"),
+        4: $("#page4"),
+      };
+      const dots = $$(".progress-dots .dot");
+      const foodItems = $$(".food-item");
+      const foodNextBtn = $("#foodNextBtn");
+      const foodError = $("#foodError");
+      const dateSetBtn = $("#dateSetBtn");
+      const dateError = $("#dateError");
+      const calendarGrid = $("#calendarGrid");
+      const calMonthYear = $("#calMonthYear");
+      const calPrev = $("#calPrev");
+      const calNext = $("#calNext");
+      const timeGrid = $("#timeGrid");
+      const confirmDate = $("#confirmDate");
+      const confirmTime = $("#confirmTime");
+      const confirmFood = $("#confirmFood");
+      const resetBtn = $("#resetBtn");
+      const noBtn = $("#noBtn");
+      const noMessage = $("#noMessage");
+      const yesBtn = $("#yesBtn");
+      const confettiOverlay = $("#confettiOverlay");
+      const heartsContainer = $("#heartsContainer");
+
+      // ── Time slots ──
+      const TIME_SLOTS = [
+        "12:00 PM",
+        "1:00 PM",
+        "2:00 PM",
+        "3:00 PM",
+        "4:00 PM",
+        "5:00 PM",
+        "6:00 PM",
+        "6:30 PM",
+        "7:00 PM",
+        "7:30 PM",
+        "8:00 PM",
+        "8:30 PM",
+      ];
+
+      const DAYS_SHORT = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+      const MONTHS = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      // ── Floating hearts ──
+      function initFloatingHearts() {
+        const emojis = ["❤️", "💕", "💖", "✨", "🌸", "💗", "🥰"];
+        for (let i = 0; i < 18; i++) {
+          const el = document.createElement("span");
+          el.className = "heart-float";
+          el.textContent = emojis[i % emojis.length];
+          el.style.left = Math.random() * 100 + "%";
+          el.style.fontSize = 0.8 + Math.random() * 1.2 + "rem";
+          el.style.animationDuration = 8 + Math.random() * 12 + "s";
+          el.style.animationDelay = Math.random() * 10 + "s";
+          el.style.opacity = 0.04 + Math.random() * 0.08;
+          heartsContainer.appendChild(el);
+        }
+      }
+      initFloatingHearts();
+
+      // ── Navigation ──
+      function goToStep(step) {
+        AppState.step = step;
+        Object.keys(pages).forEach((k) => {
+          pages[k].classList.toggle("active", parseInt(k) === step);
+        });
+        dots.forEach((dot, idx) => {
+          const num = idx + 1;
+          dot.classList.toggle("active", num === step);
+          dot.classList.toggle("done", num < step);
+        });
+        // Scroll to top of card on mobile
+        const card = $("#appCard");
+        if (card) card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        // Trigger confetti on step 4
+        if (step === 4) {
+          launchConfetti();
+        }
+      }
+
+      // ── Food selection ──
+      foodItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          foodItems.forEach((el) => el.classList.remove("selected"));
+          item.classList.add("selected");
+          AppState.food = item.dataset.food;
+          foodNextBtn.disabled = false;
+          foodError.classList.add("hidden");
+        });
+      });
+
+      foodNextBtn.addEventListener("click", () => {
+        if (!AppState.food) {
+          foodError.classList.remove("hidden");
+          return;
+        }
+        goToStep(3);
+        renderCalendar();
+        renderTimes();
+      });
+
+      // ── Calendar ──
+      function renderCalendar() {
+        const { calMonth, calYear } = AppState;
+        calMonthYear.textContent = `${MONTHS[calMonth]} ${calYear}`;
+
+        const firstDay = new Date(calYear, calMonth, 1).getDay();
+        const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+        let html = "";
+        // Day labels
+        DAYS_SHORT.forEach((d) => {
+          html += `<div class="day-label">${d}</div>`;
+        });
+        // Empty cells
+        for (let i = 0; i < firstDay; i++) {
+          html += `<div class="day empty"></div>`;
+        }
+        // Days
+        const today = new Date();
+        const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+        for (let d = 1; d <= daysInMonth; d++) {
+          const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+          const isPast = dateStr < todayStr;
+          const isSelected = AppState.date === dateStr;
+          const classes = `day${isPast ? " empty" : ""}${isSelected ? " selected" : ""}`;
+          const clickable = !isPast ? `data-date="${dateStr}"` : "";
+          html += `<div class="${classes}" ${clickable}>${d}</div>`;
+        }
+
+        calendarGrid.innerHTML = html;
+
+        // Click handlers
+        calendarGrid.querySelectorAll(".day:not(.empty)").forEach((el) => {
+          el.addEventListener("click", () => {
+            const dateStr = el.dataset.date;
+            if (!dateStr) return;
+            // deselect all
+            calendarGrid
+              .querySelectorAll(".day")
+              .forEach((d) => d.classList.remove("selected"));
+            el.classList.add("selected");
+            AppState.date = dateStr;
+            checkDateTime();
+          });
+        });
+      }
+
+      calPrev.addEventListener("click", () => {
+        if (AppState.calMonth === 0) {
+          AppState.calMonth = 11;
+          AppState.calYear--;
+        } else {
+          AppState.calMonth--;
+        }
+        renderCalendar();
+      });
+
+      calNext.addEventListener("click", () => {
+        if (AppState.calMonth === 11) {
+          AppState.calMonth = 0;
+          AppState.calYear++;
+        } else {
+          AppState.calMonth++;
+        }
+        renderCalendar();
+      });
+
+      // ── Time selection ──
+      function renderTimes() {
+        let html = "";
+        TIME_SLOTS.forEach((t) => {
+          const selected = AppState.time === t ? "selected" : "";
+          html += `<div class="time-item ${selected}" data-time="${t}">${t}</div>`;
+        });
+        timeGrid.innerHTML = html;
+
+        timeGrid.querySelectorAll(".time-item").forEach((el) => {
+          el.addEventListener("click", () => {
+            timeGrid
+              .querySelectorAll(".time-item")
+              .forEach((e) => e.classList.remove("selected"));
+            el.classList.add("selected");
+            AppState.time = el.dataset.time;
+            checkDateTime();
+          });
+        });
+      }
+
+      function checkDateTime() {
+        if (AppState.date && AppState.time) {
+          dateSetBtn.disabled = false;
+          dateError.classList.add("hidden");
+        } else {
+          dateSetBtn.disabled = true;
+        }
+      }
+
+      dateSetBtn.addEventListener("click", () => {
+        if (!AppState.date || !AppState.time) {
+          dateError.classList.remove("hidden");
+          return;
+        }
+        // Build confirmation
+        const d = new Date(AppState.date);
+        const dayName = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ][d.getDay()];
+        const monthName = MONTHS[d.getMonth()];
+        const dayNum = d.getDate();
+        confirmDate.textContent = `${dayName}, ${monthName} ${dayNum}`;
+        confirmTime.textContent = AppState.time;
+        confirmFood.textContent = AppState.food || "Pasta";
+        goToStep(4);
+      });
+
+      // ── Confetti ──
+      function launchConfetti() {
+        const container = confettiOverlay;
+        container.innerHTML = "";
+        const colors = [
+          "#ff6b9d",
+          "#ffd700",
+          "#8b5cf6",
+          "#ff4d6d",
+          "#fbbf24",
+          "#34d399",
+          "#f472b6",
+          "#60a5fa",
+        ];
+        const emojis = ["❤️", "💕", "✨", "🎉", "🌸", "💖", "🥳", "🎊"];
+
+        for (let i = 0; i < 80; i++) {
+          const piece = document.createElement("div");
+          piece.className = "confetti-piece";
+          const isEmoji = Math.random() > 0.5;
+          if (isEmoji) {
+            piece.textContent =
+              emojis[Math.floor(Math.random() * emojis.length)];
+            piece.style.fontSize = 0.8 + Math.random() * 1.2 + "rem";
+            piece.style.width = "auto";
+            piece.style.height = "auto";
+            piece.style.background = "transparent";
+          } else {
+            piece.style.background =
+              colors[Math.floor(Math.random() * colors.length)];
+            piece.style.width = 6 + Math.random() * 10 + "px";
+            piece.style.height = 6 + Math.random() * 10 + "px";
+            piece.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+            piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+          }
+          piece.style.left = Math.random() * 100 + "%";
+          piece.style.top = "-20px";
+          piece.style.animationDuration = 1.5 + Math.random() * 2.5 + "s";
+          piece.style.animationDelay = Math.random() * 1.5 + "s";
+          piece.style.opacity = 0.7 + Math.random() * 0.3;
+          container.appendChild(piece);
+        }
+
+        // Clean up after a while
+        setTimeout(() => {
+          container.innerHTML = "";
+        }, 5000);
+      }
+
+      // ── Reset ──
+      resetBtn.addEventListener("click", () => {
+        AppState.food = null;
+        AppState.date = null;
+        AppState.time = null;
+        AppState.calMonth = 5;
+        AppState.calYear = 2026;
+        foodItems.forEach((el) => el.classList.remove("selected"));
+        foodNextBtn.disabled = true;
+        foodError.classList.add("hidden");
+        dateSetBtn.disabled = true;
+        dateError.classList.add("hidden");
+        confettiOverlay.innerHTML = "";
+        goToStep(1);
+        renderCalendar();
+        renderTimes();
+      });
+
+      // ── NO button: flee + message ──
+      let noClickCount = 0;
+      const noBtnEl = noBtn;
+
+      noBtnEl.addEventListener("mouseenter", () => {
+        // flee!
+        const wrapper = noBtnEl.closest(".btn-no-wrapper");
+        if (!wrapper) return;
+        const maxX = 120;
+        const maxY = 60;
+        const dx = (Math.random() - 0.5) * maxX * 2;
+        const dy = (Math.random() - 0.5) * maxY * 2;
+        wrapper.style.transform = `translate(${dx}px, ${dy}px)`;
+        wrapper.style.transition =
+          "transform 0.15s cubic-bezier(0.23, 1, 0.32, 1)";
+      });
+
+      noBtnEl.addEventListener("click", (e) => {
+        e.preventDefault();
+        noClickCount++;
+        noMessage.classList.remove("hidden");
+        noMessage.textContent = [
+          "🥺 are you sure? try again... 💕",
+          "😤 i said YES only!",
+          "💀 you can't escape!",
+          "🥰 just say YES already!",
+          "💗 i'll keep asking...",
+          "❤️ YES is the only answer!",
+        ][Math.min(noClickCount - 1, 5)];
+        if (noClickCount > 3) {
+          // Make the NO button smaller and more transparent
+          noBtnEl.style.transform = "scale(0.7)";
+          noBtnEl.style.opacity = "0.3";
+          setTimeout(() => {
+            noBtnEl.style.transform = "scale(1)";
+            noBtnEl.style.opacity = "1";
+          }, 600);
+        }
+        if (noClickCount > 6) {
+          // Just force YES
+          noMessage.textContent = "💖 okay i'm clicking YES for you! 💖";
+          setTimeout(() => {
+            document.getElementById("yesBtn").click();
+          }, 400);
+        }
+      });
+
+      // ── YES button ──
+      yesBtn.addEventListener("click", () => {
+        goToStep(2);
+      });
+
+      // ── Init ──
+      renderCalendar();
+      renderTimes();
+      goToStep(1);
+
+      // ── Keyboard shortcut: Enter to advance ──
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          const step = AppState.step;
+          if (step === 1) {
+            document.getElementById("yesBtn")?.click();
+          } else if (step === 2) {
+            if (!foodNextBtn.disabled) foodNextBtn.click();
+          } else if (step === 3) {
+            if (!dateSetBtn.disabled) dateSetBtn.click();
+          }
+        }
+      });
+
+      // ── Responsive: fix for mobile viewport ──
+      function adjustViewport() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
+      }
+      adjustViewport();
+      window.addEventListener("resize", adjustViewport);
+
+      console.log("💕 Made with love for someone special ✨");
+      console.log("📸 Based on your 4 screenshots!");
+    </script>
+  </body>
+</html>
