@@ -1,4 +1,4 @@
-/* ========== Reset & Base ========== */
+/* ---------------- Reset & Base ---------------- */
 * {
   margin: 0;
   padding: 0;
@@ -19,14 +19,14 @@ body {
   align-items: center;
   justify-content: center;
   /* Content can legitimately be taller than the viewport (long calendar +
-     time list on short/narrow screens) — clip horizontally only, and let
+     time list on short/narrow screens) - clip horizontally only, and let
      the page scroll vertically instead of cutting content off. */
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
 }
 
-/* ========== Animated Background ========== */
+/* ---------------- Animated Background ---------------- */
 .bg-gradient-animated {
   position: fixed;
   inset: 0;
@@ -89,7 +89,7 @@ body {
   }
 }
 
-/* ========== Floating Hearts ========== */
+/* ---------------- Floating Hearts ---------------- */
 .hearts-container {
   position: fixed;
   inset: 0;
@@ -123,7 +123,7 @@ body {
   }
 }
 
-/* ========== App Container ========== */
+/* ---------------- App Container ---------------- */
 .app-container {
   position: relative;
   z-index: 1;
@@ -139,7 +139,7 @@ body {
   justify-content: center;
 }
 
-/* ========== Glass Card ========== */
+/* ---------------- Glass Card ---------------- */
 .glass-card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
@@ -153,7 +153,7 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transition: all 0.4s ease;
   position: relative;
-  /* NOTE: intentionally no overflow:hidden here — the card's height is
+  /* NOTE: intentionally no overflow:hidden here - the card's height is
      auto/content-driven, so nothing needs clipping, and hiding overflow
      was cropping the ::before mask ring on some pages. */
 }
@@ -180,7 +180,7 @@ body {
   pointer-events: none;
 }
 
-/* ========== Pages ========== */
+/* ---------------- Pages ---------------- */
 .page {
   display: none;
   animation: pageFadeIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
@@ -201,12 +201,12 @@ body {
   }
 }
 
-/* ========== Typography ========== */
+/* ---------------- Typography ---------------- */
 .font-display {
   font-family: "Playfair Display", serif;
 }
 
-/* ========== Buttons ========== */
+/* ---------------- Buttons ---------------- */
 .btn-primary {
   background: linear-gradient(135deg, #ff6b9d, #e8557a);
   border: none;
@@ -291,7 +291,7 @@ body {
 }
 
 /* On touch devices there's no hover, so the "dodge" trick can't work off
-   mouseenter — keep the button reachable and let the tap-counter messages
+   mouseenter - keep the button reachable and let the tap-counter messages
    carry the playfulness instead. */
 @media (hover: none) {
   .btn-no-wrapper {
@@ -299,7 +299,7 @@ body {
   }
 }
 
-/* ========== Food Grid ========== */
+/* ---------------- Food Grid ---------------- */
 .food-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -344,7 +344,7 @@ body {
   overflow-wrap: anywhere;
 }
 
-/* ========== Calendar ========== */
+/* ---------------- Calendar ---------------- */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -434,7 +434,7 @@ body {
   color: #fff;
 }
 
-/* ========== Time Grid ========== */
+/* ---------------- Time Grid ---------------- */
 .time-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -467,7 +467,7 @@ body {
   box-shadow: 0 0 20px rgba(255, 107, 157, 0.12);
 }
 
-/* ========== Confetti ========== */
+/* ---------------- Confetti ---------------- */
 .confetti-overlay {
   position: fixed;
   inset: 0;
@@ -495,7 +495,7 @@ body {
   }
 }
 
-/* ========== Misc ========== */
+/* ---------------- Misc ---------------- */
 .text-shadow-glow {
   text-shadow: 0 0 40px rgba(255, 107, 157, 0.3);
 }
@@ -616,7 +616,7 @@ body {
   background: rgba(255, 107, 157, 0.3);
 }
 
-/* ========== Responsive ========== */
+/* ---------------- Responsive ---------------- */
 
 /* Extra-small phones (older/small Android, iPhone SE-and-below) */
 @media (max-width: 359px) {
@@ -741,7 +741,7 @@ body {
   }
 }
 
-/* Short viewports (landscape phones) — tighten vertical rhythm so the
+/* Short viewports (landscape phones) - tighten vertical rhythm so the
    calendar + time grid + button don't force excessive scrolling */
 @media (max-height: 600px) and (orientation: landscape) {
   .app-container {
@@ -847,7 +847,7 @@ body {
   }
 }
 
-/* Hide scrollbar (visual only — scrolling itself stays enabled) */
+/* Hide scrollbar (visual only - scrolling itself stays enabled) */
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
