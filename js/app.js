@@ -97,7 +97,7 @@ function goToStep(step) {
     dot.classList.toggle("active", num === step);
     dot.classList.toggle("done", num < step);
   });
-  // Scroll to top of card (mobile friendly)
+  // Scroll to top of card ---> mobile friendly
   const card = $("#appCard");
   if (card) card.scrollIntoView({ behavior: "smooth", block: "nearest" });
   // Trigger confetti on final step
@@ -380,7 +380,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// ---------- Viewport Height Fix for Mobile ----------
 // Mobile browser chrome (address bar) resizing changes 100vh unreliably,
 // so this custom property is used as a fallback ahead of `dvh` support
 // (see the --vh usage in styles.css).
