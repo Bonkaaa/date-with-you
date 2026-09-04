@@ -131,7 +131,10 @@
           const res = await fetch("/api/responses");
           const json = await res.json();
 
-          if (!res.ok) throw new Error(json.error || "Failed to fetch");
+          if (!res.ok) {
+            const errDetail = json.details ? `${json.error}: ${json.details}` : (json.error || "Failed to fetch");
+            throw new Error(errDetail);
+          }
 
           const data = json.data || [];
           totalCount.textContent = data.length;

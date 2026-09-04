@@ -698,7 +698,7 @@ if (submitDateBtn) {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || "Lỗi lưu dữ liệu. Vui lòng thử lại!");
+        throw new Error(result.details || result.error || "Lỗi lưu dữ liệu. Vui lòng thử lại!");
       }
 
       // Success transition

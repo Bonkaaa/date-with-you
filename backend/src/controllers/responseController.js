@@ -1,8 +1,9 @@
-const { pool } = require('../config/db');
+const { pool, ensureDbInit } = require('../config/db');
 
 // GET /api/health
 async function checkHealth(req, res) {
   try {
+    await ensureDbInit();
     const result = await pool.query('SELECT NOW()');
     return res.json({ status: 'ok', dbTime: result.rows[0].now });
   } catch (err) {
@@ -35,6 +36,8 @@ async function createResponse(req, res) {
     if (!selectedDate || !selectedTime) {
       return res.status(400).json({ error: 'Vui lòng chọn ngày và giờ hẹn' });
     }
+
+    await ensureDbInit();
 
     const query = `
       INSERT INTO date_responses (email, date_idea, coffee_type, selected_date, selected_time, food_preference, notes)
@@ -71,6 +74,8 @@ async function createResponse(req, res) {
 // GET /api/responses
 async function getResponses(req, res) {
   try {
+    await ensureDbInit();
+
     const result = await pool.query(`
       SELECT 
         id, 
