@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💌 Danh Sách Phản Hồi Hẹn Hò - Admin Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .admin-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 32px 16px;
+        position: relative;
+        z-index: 1;
+      }
+      .response-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 24px;
+        transition: all 0.3s;
+      }
+      .response-card:hover {
+        border-color: rgba(255, 107, 157, 0.4);
+        transform: translateY(-2px);
+      }
+      .badge-pill {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+    </style>
+  </head>
+  <body class="text-white">
+    <!-- Animated Background Layers -->
+    <div class="bg-gradient-animated"></div>
+    <div class="bg-orb bg-orb--pink"></div>
+    <div class="bg-orb bg-orb--purple"></div>
+
+    <div class="admin-container">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 pb-4 border-b border-white/10">
+        <div>
+          <h1 class="font-display text-3xl md:text-4xl font-bold flex items-center gap-3">
+            <span>💌</span> Danh Sách Phản Hồi Hẹn Hò
+          </h1>
+          <p class="text-pink-200/60 text-sm mt-1">
+            Xem ngay các buổi hẹn mà người ấy đã chốt kèo 💕
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <a
+            href="/"
+            class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-sm transition"
+          >
+            ← Về trang Date
+          </a>
+          <button
+            id="refreshBtn"
+            class="px-5 py-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-sm font-semibold shadow-lg shadow-pink-500/20 transition flex items-center gap-2"
+          >
+            <span>🔄</span> Làm mới
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div class="response-card text-center py-4">
+          <div class="text-3xl font-extrabold text-pink-400" id="totalCount">0</div>
+          <div class="text-white/60 text-xs mt-1 uppercase tracking-wider">Tổng số phản hồi</div>
+        </div>
+        <div class="response-card text-center py-4">
+          <div class="text-3xl font-extrabold text-purple-300" id="latestDate">-</div>
+          <div class="text-white/60 text-xs mt-1 uppercase tracking-wider">Ngày hẹn mới nhất</div>
+        </div>
+        <div class="response-card text-center py-4">
+          <div class="text-3xl font-extrabold text-emerald-400" id="dbStatus">Active</div>
+          <div class="text-white/60 text-xs mt-1 uppercase tracking-wider">Trạng thái Database</div>
+        </div>
+      </div>
+
+      <!-- Loading and Empty States -->
+      <div id="loadingIndicator" class="text-center py-16">
+        <div class="text-4xl animate-bounce mb-3">💖</div>
+        <p class="text-white/60 text-sm">Đang tải dữ liệu từ PostgreSQL...</p>
+      </div>
+
+      <div id="emptyState" class="hidden text-center py-16 response-card">
+        <div class="text-5xl mb-3">📭</div>
+        <h3 class="text-xl font-bold mb-1">Chưa có phản hồi nào</h3>
+        <p class="text-white/50 text-sm max-w-sm mx-auto mb-4">
+          Hãy gửi đường link web cho người ấy để nhận câu trả lời ngọt ngào đầu tiên nhé!
+        </p>
+        <a href="/" class="btn-primary inline-block text-sm px-6 py-2.5">
+          Mở trang web date 💕
+        </a>
+      </div>
+
+      <!-- Response Cards Grid -->
+      <div id="responsesList" class="space-y-4"></div>
+    </div>
+
+    <script>
+      async function loadResponses() {
+        const loading = document.getElementById("loadingIndicator");
+        const empty = document.getElementById("emptyState");
+        const list = document.getElementById("responsesList");
+        const totalCount = document.getElementById("totalCount");
+        const latestDate = document.getElementById("latestDate");
+        const dbStatus = document.getElementById("dbStatus");
+
+        loading.classList.remove("hidden");
+        empty.classList.add("hidden");
+        list.innerHTML = "";
+
+        try {
+          const res = await fetch("/api/responses");
+          const json = await res.json();
+
+          if (!res.ok) throw new Error(json.error || "Failed to fetch");
+
+          const data = json.data || [];
+          totalCount.textContent = data.length;
+
+          if (data.length === 0) {
+            empty.classList.remove("hidden");
+            latestDate.textContent = "-";
+          } else {
+            latestDate.textContent = data[0].selected_date;
+            list.innerHTML = data.map((item, idx) => {
+              const createdDate = new Date(item.created_at).toLocaleString("vi-VN");
+              return `
+                <div class="response-card">
+                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
+                    <div class="flex items-center gap-3">
+                      <span class="w-8 h-8 rounded-full bg-pink-500/20 text-pink-300 font-bold flex items-center justify-center text-sm">
+                        #${data.length - idx}
+                      </span>
+                      <div>
+                        <div class="font-bold text-lg text-white flex items-center gap-2">
+                          <span>💌</span> ${escapeHtml(item.email)}
+                        </div>
+                        <div class="text-xs text-white/40">Gửi lúc: ${createdDate}</div>
+                      </div>
+                    </div>
+                    <span class="badge-pill bg-pink-500/20 text-pink-300 border border-pink-500/30">
+                      ${escapeHtml(item.date_idea)}
+                    </span>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-sm">
+                    <div class="bg-white/5 p-3 rounded-xl">
+                      <span class="text-white/40 text-xs block mb-1">📅 Ngày hẹn</span>
+                      <span class="font-semibold text-pink-200">${item.selected_date}</span>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-xl">
+                      <span class="text-white/40 text-xs block mb-1">🕒 Giờ hẹn</span>
+                      <span class="font-semibold text-purple-200">${escapeHtml(item.selected_time)}</span>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-xl">
+                      <span class="text-white/40 text-xs block mb-1">☕ Quán Cafe</span>
+                      <span class="font-semibold text-amber-200">${escapeHtml(item.coffee_type || "Chưa có")}</span>
+                    </div>
+                    <div class="bg-white/5 p-3 rounded-xl">
+                      <span class="text-white/40 text-xs block mb-1">🍽️ Món ăn trước</span>
+                      <span class="font-semibold text-emerald-200">${escapeHtml(item.food_preference || "Không ăn trước")}</span>
+                    </div>
+                  </div>
+
+                  ${item.notes ? `
+                    <div class="mt-3 p-3 rounded-xl bg-pink-500/10 border border-pink-500/20 text-xs">
+                      <span class="text-pink-300 font-semibold block mb-1">📝 Lời nhắn gửi:</span>
+                      <span class="text-white/80">${escapeHtml(item.notes)}</span>
+                    </div>
+                  ` : ''}
+                </div>
+              `;
+            }).join("");
+          }
+          dbStatus.textContent = "Online ✅";
+          dbStatus.className = "text-3xl font-extrabold text-emerald-400";
+        } catch (err) {
+          console.error(err);
+          dbStatus.textContent = "Error ❌";
+          dbStatus.className = "text-3xl font-extrabold text-rose-500";
+          list.innerHTML = `<div class="p-6 text-center text-rose-300 bg-rose-500/10 rounded-2xl border border-rose-500/30">
+            Không thể tải dữ liệu từ database: ${escapeHtml(err.message)}
+          </div>`;
+        } finally {
+          loading.classList.add("hidden");
+        }
+      }
+
+      function escapeHtml(text) {
+        if (!text) return "";
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      document.getElementById("refreshBtn").addEventListener("click", loadResponses);
+      loadResponses();
+    </script>
+  </body>
+</html>

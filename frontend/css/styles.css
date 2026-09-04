@@ -870,3 +870,422 @@ body {
     transform: translateY(-10px);
   }
 }
+
+/* ---------------- Form Controls & Inputs ---------------- */
+.input-group {
+  text-align: left;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 6px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 1.1rem;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.custom-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 14px 16px 14px 44px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.custom-input:focus {
+  border-color: #ff6b9d;
+  background: rgba(255, 107, 157, 0.08);
+  box-shadow: 0 0 25px rgba(255, 107, 157, 0.25);
+}
+
+.custom-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.input-error-msg {
+  color: #ff8fa3;
+  font-size: 0.78rem;
+  margin-top: 6px;
+}
+
+.custom-textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 12px 14px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  min-height: 56px;
+  transition: all 0.25s;
+}
+
+.custom-textarea:focus {
+  border-color: #ff6b9d;
+  background: rgba(255, 107, 157, 0.08);
+  box-shadow: 0 0 25px rgba(255, 107, 157, 0.2);
+}
+
+.custom-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* ---------------- Date Idea Cards ---------------- */
+.idea-list {
+  text-align: left;
+}
+
+.idea-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  user-select: none;
+}
+
+.idea-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 107, 157, 0.4);
+  transform: translateY(-2px);
+}
+
+.idea-card.selected {
+  border-color: #ff6b9d;
+  background: rgba(255, 107, 157, 0.14);
+  box-shadow: 0 8px 30px rgba(255, 107, 157, 0.22);
+  transform: scale(1.01);
+}
+
+.idea-icon {
+  font-size: 2rem;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.idea-content {
+  flex: 1;
+}
+
+.idea-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(255, 107, 157, 0.2);
+  color: #ffb3c6;
+  margin-bottom: 4px;
+}
+
+.idea-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.idea-desc {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 3px;
+  line-height: 1.35;
+}
+
+.idea-check {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: transparent;
+  transition: all 0.25s;
+}
+
+.idea-card.selected .idea-check {
+  background: #ff6b9d;
+  border-color: #ff6b9d;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(255, 107, 157, 0.6);
+}
+
+/* ---------------- Loading States ---------------- */
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 50%;
+  left: 50%;
+  margin-top: -9px;
+  margin-left: -9px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------------- Dynamic Choice Cards (Coffee & Food) ---------------- */
+.choice-section-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.choice-section-desc {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 8px;
+}
+
+.choice-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.choice-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 480px) {
+  .choice-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.choice-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 12px 10px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  text-align: center;
+  position: relative;
+  user-select: none;
+}
+
+.choice-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 107, 157, 0.4);
+  transform: translateY(-2px);
+}
+
+.choice-card.selected {
+  border-color: #ff6b9d;
+  background: rgba(255, 107, 157, 0.16);
+  box-shadow: 0 4px 20px rgba(255, 107, 157, 0.25);
+  transform: scale(1.02);
+}
+
+.choice-card .choice-icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.choice-card .choice-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.choice-card .choice-sub {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 3px;
+  line-height: 1.25;
+}
+
+.choice-badge-indicator {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: transparent;
+  transition: all 0.2s;
+}
+
+.choice-card.selected .choice-badge-indicator {
+  background: #ff6b9d;
+  border-color: #ff6b9d;
+  color: #fff;
+}
+
+.choice-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 420px) {
+  .choice-grid-3 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* ---------------- Spotlight Venue Preview Card ---------------- */
+.venue-preview-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 107, 157, 0.3);
+  border-radius: 20px;
+  padding: 16px;
+  margin-top: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: previewSlideDown 0.35s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  text-align: left;
+}
+
+@keyframes previewSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.venue-preview-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffb3c6;
+  background: rgba(255, 107, 157, 0.2);
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.venue-preview-img-wrapper {
+  width: 100%;
+  height: 190px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.venue-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.venue-preview-card:hover .venue-preview-img {
+  transform: scale(1.03);
+}
+
+.venue-preview-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.venue-preview-addr {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.venue-preview-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.25), rgba(232, 85, 122, 0.2));
+  border: 1px solid rgba(255, 107, 157, 0.5);
+  border-radius: 30px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.venue-preview-map-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.4), rgba(232, 85, 122, 0.35));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+  color: #fff;
+}
+
+

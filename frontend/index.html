@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>💕 Lời Mời Đi Date - A Date With You</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Animated Background Layers -->
+    <div class="bg-gradient-animated"></div>
+    <div class="bg-orb bg-orb--pink"></div>
+    <div class="bg-orb bg-orb--purple"></div>
+    <div class="bg-orb bg-orb--gold"></div>
+
+    <!-- Floating Hearts Container -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Confetti Overlay -->
+    <div class="confetti-overlay" id="confettiOverlay"></div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+      <div class="glass-card" id="appCard">
+        <!-- Dynamic Progress Indicator Dots -->
+        <div class="progress-dots" id="progressDots"></div>
+
+        <!-- Page 1: The Question -->
+        <div class="page active" id="page1">
+          <div class="text-center">
+            <div class="text-5xl mb-3 animate-bounce-slow">👋💕</div>
+            <p class="text-pink-300 font-semibold text-sm sm:text-base mb-1 tracking-wide">
+              Helloo chị, Kiên của chị đâyy ✨
+            </p>
+            <h1
+              class="font-display text-2xl md:text-3xl font-bold text-white mb-2 leading-snug"
+            >
+              Chúng ta sẽ đi first date nhé,<br />đượt khum! 💕
+            </h1>
+            <p class="text-pink-200/80 text-sm mb-2 font-medium">
+              Đi date với thằng em xã hội của chị nhó 🥰👉👈
+            </p>
+            <p class="text-white/30 text-xs mb-8">✨ be honest - trả lời thật lòng nha ✨</p>
+            <div
+              class="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
+              <button class="btn-primary text-lg px-10" id="yesBtn">
+                Okii ❤️
+              </button>
+              <div class="btn-no-wrapper">
+                <button class="btn-no text-lg px-8" id="noBtn">Không ❌</button>
+              </div>
+            </div>
+            <div
+              id="noMessage"
+              class="mt-6 text-pink-300/80 text-sm font-medium hidden transition-all"
+            >
+              🥺 are you sure? Nghĩ lại xíu điii... 💕
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 2: Email Input -->
+        <div class="page" id="page2">
+          <div class="text-center mb-6">
+            <div class="text-4xl mb-3">💌</div>
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
+              Cho em xin email nha!
+            </h2>
+            <p class="text-pink-200/60 text-sm mt-1">
+              Để em gửi vé hẹn hò & thư xác nhận đặc biệt cho chị nhé ✨
+            </p>
+          </div>
+
+          <div class="space-y-4 max-w-sm mx-auto">
+            <div class="input-group">
+              <label for="emailInput" class="input-label">Email của chị</label>
+              <div class="input-wrapper">
+                <span class="input-icon">📮</span>
+                <input
+                  type="email"
+                  id="emailInput"
+                  class="custom-input"
+                  placeholder="name@example.com"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+              <p id="emailError" class="input-error-msg hidden">
+                Vui lòng nhập đúng định dạng email (vd: em@gmail.com) nha!
+              </p>
+            </div>
+
+            <div class="flex items-center justify-between gap-3 pt-4">
+              <button class="btn-secondary text-sm px-5" id="emailBackBtn">
+                ← Quay lại
+              </button>
+              <button class="btn-primary text-sm px-8" id="emailNextBtn">
+                Tiếp tục ✨
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 3: Date Idea Selection (2 Options) -->
+        <div class="page" id="page3">
+          <div class="text-center mb-5">
+            <div class="text-4xl mb-2">✨</div>
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
+              Ý tưởng buổi hẹn
+            </h2>
+            <p class="text-pink-200/60 text-sm mt-1">
+              Chị thích kiểu hẹn hò nào nhất dưới đây nè? 💖
+            </p>
+          </div>
+
+          <div class="idea-list space-y-3.5" id="ideaList">
+            <!-- Option 1 -->
+            <div
+              class="idea-card"
+              data-idea="Đi coffee date (buổi chiều)"
+              data-tag="Buổi chiều"
+            >
+              <div class="idea-icon">☕</div>
+              <div class="idea-content">
+                <div class="idea-badge">Buổi chiều</div>
+                <h3 class="idea-title">Đi coffee date (buổi chiều)</h3>
+                <p class="idea-desc">
+                  Một buổi chiều thư thả, tách cafe thơm lừng và những câu chuyện ngọt ngào từ đáy lòng.
+                </p>
+              </div>
+              <div class="idea-check">✓</div>
+            </div>
+
+            <!-- Option 2 -->
+            <div
+              class="idea-card"
+              data-idea="Đi ăn trước và coffee date (buổi chiều tối)"
+              data-tag="Buổi chiều tối"
+            >
+              <div class="idea-icon">🍽️</div>
+              <div class="idea-content">
+                <div class="idea-badge">Buổi chiều tối</div>
+                <h3 class="idea-title">Đi ăn trước và coffee date (buổi chiều tối)</h3>
+                <p class="idea-desc">
+                  Lấp đầy chiếc bụng đói với món ăn mê mẩn, sau đó ghé quán cafe tâm tình trò chuyện.
+                </p>
+              </div>
+              <div class="idea-check">✓</div>
+            </div>
+          </div>
+
+          <p id="ideaError" class="text-pink-300/60 text-xs mt-3 text-center hidden">
+            Chọn một ý tưởng chị thích nhé!
+          </p>
+
+          <div class="flex items-center justify-between gap-3 mt-6">
+            <button class="btn-secondary text-sm px-5" id="ideaBackBtn">
+              ← Quay lại
+            </button>
+            <button class="btn-primary text-sm px-8" id="ideaNextBtn" disabled>
+              Tiếp tục ✨
+            </button>
+          </div>
+        </div>
+
+        <!-- Page Food: Chọn Món Ăn Trước (Chỉ hiển thị khi chọn Đi ăn trước và coffee date) -->
+        <div class="page" id="pageFood">
+          <div class="text-center mb-5">
+            <div class="text-4xl mb-2">🍽️</div>
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
+              Ăn gì trước nè?
+            </h2>
+            <p class="text-pink-200/60 text-sm mt-1">
+              Chọn món ngon lấp đầy chiếc bụng đói trước nha! 😋
+            </p>
+          </div>
+
+          <div class="choice-grid-3 mb-2" id="foodGrid">
+            <div class="choice-card" data-food="Pasta">
+              <div class="choice-badge-indicator">✓</div>
+              <span class="choice-icon">🍝</span>
+              <div class="choice-title">Pasta</div>
+              <div class="choice-sub">Gusto Pasta Bar</div>
+            </div>
+            <div class="choice-card" data-food="Mì cay">
+              <div class="choice-badge-indicator">✓</div>
+              <span class="choice-icon">🌶️</span>
+              <div class="choice-title">Mì cay</div>
+              <div class="choice-sub">Em hum biết ✨</div>
+            </div>
+            <div class="choice-card" data-food="Gà rán">
+              <div class="choice-badge-indicator">✓</div>
+              <span class="choice-icon">🍗</span>
+              <div class="choice-title">Gà rán</div>
+              <div class="choice-sub">Chicken 88</div>
+            </div>
+          </div>
+
+          <!-- Spotlight Preview for Food -->
+          <div id="foodPreviewContainer" class="hidden"></div>
+
+          <p id="foodError" class="text-pink-300/80 text-xs mt-3 text-center hidden">
+            Chị chọn 1 món muốn ăn nha!
+          </p>
+
+          <div class="flex items-center justify-between gap-3 mt-6">
+            <button class="btn-secondary text-sm px-5" id="foodBackBtn">
+              ← Quay lại
+            </button>
+            <button class="btn-primary text-sm px-8" id="foodNextBtn" disabled>
+              Tiếp tục ☕
+            </button>
+          </div>
+        </div>
+
+        <!-- Page Coffee: Chọn Quán Coffee Date (Tách riêng biệt) -->
+        <div class="page" id="pageCoffee">
+          <div class="text-center mb-5">
+            <div class="text-4xl mb-2">☕</div>
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
+              Chọn quán coffee date
+            </h2>
+            <p class="text-pink-200/60 text-sm mt-1">
+              Chị thích không gian cafe kiểu nào nè? ✨
+            </p>
+          </div>
+
+          <div class="choice-grid-2 mb-2" id="coffeeGrid">
+            <div class="choice-card" data-coffee="Option bình thường">
+              <div class="choice-badge-indicator">✓</div>
+              <span class="choice-icon">☕</span>
+              <div class="choice-title">Option bình thường</div>
+              <div class="choice-sub">Góc Vuông • Chill & Nhạc êm</div>
+            </div>
+            <div class="choice-card" data-coffee="Cafe mèo">
+              <div class="choice-badge-indicator">✓</div>
+              <span class="choice-icon">🐱</span>
+              <div class="choice-title">Cafe mèo</div>
+              <div class="choice-sub">Râu Thỏ • Mấy bé mèo cưng xỉu</div>
+            </div>
+          </div>
+
+          <!-- Spotlight Preview for Coffee -->
+          <div id="coffeePreviewContainer" class="hidden"></div>
+
+          <p id="coffeeError" class="text-pink-300/80 text-xs mt-3 text-center hidden">
+            Chị chọn 1 kiểu quán cafe nhé!
+          </p>
+
+          <div class="flex items-center justify-between gap-3 mt-6">
+            <button class="btn-secondary text-sm px-5" id="coffeeBackBtn">
+              ← Quay lại
+            </button>
+            <button class="btn-primary text-sm px-8" id="coffeeNextBtn" disabled>
+              Tiếp tục 📅
+            </button>
+          </div>
+        </div>
+
+        <!-- Page DateTime: Chọn Ngày, Giờ & Lời nhắn (Tách riêng biệt) -->
+        <div class="page" id="pageDateTime">
+          <div class="text-center mb-4">
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
+              Thời gian & Lời nhắn
+            </h2>
+            <p class="text-pink-200/60 text-sm mt-1" id="dateTimeSubtitle">
+              Chọn ngày và khung giờ hẹn phù hợp với chị nhé 📅
+            </p>
+          </div>
+
+          <!-- Calendar Widget -->
+          <div class="mb-4">
+            <div class="calendar-header">
+              <button class="nav-btn" id="calPrev" aria-label="Tháng trước">
+                ‹
+              </button>
+              <span class="month-year" id="calMonthYear">Tháng 9 2026</span>
+              <button class="nav-btn" id="calNext" aria-label="Tháng sau">
+                ›
+              </button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+              <!-- JS rendered -->
+            </div>
+          </div>
+
+          <!-- Time Slots -->
+          <div class="mb-4">
+            <p
+              class="text-white/60 text-xs font-medium uppercase tracking-wider mb-2"
+              id="timeSectionTitle"
+            >
+              Chọn khung giờ 🕒
+            </p>
+            <div class="time-grid" id="timeGrid">
+              <!-- JS rendered -->
+            </div>
+          </div>
+
+          <!-- Special Notes / Venue Wish -->
+          <div class="mb-4">
+            <label for="notesInput" class="input-label"
+              >Ghi chú thêm / Quán quen chị thích (tuỳ chọn)</label
+            >
+            <textarea
+              id="notesInput"
+              class="custom-textarea"
+              rows="2"
+              placeholder="Ví dụ: Chị biết quán cafe/ăn này view xinh lắm, hoặc món gì chị kiêng..."
+            ></textarea>
+          </div>
+
+          <p id="dateTimeError" class="text-pink-300/80 text-xs mb-3 text-center hidden">
+            Vui lòng chọn ngày và khung giờ hẹn nhé!
+          </p>
+
+          <div class="flex items-center justify-between gap-3">
+            <button class="btn-secondary text-sm px-5" id="dateTimeBackBtn">
+              ← Quay lại
+            </button>
+            <button class="btn-primary text-sm px-8" id="dateTimeNextBtn" disabled>
+              Xem lại lịch hẹn ✨
+            </button>
+          </div>
+        </div>
+
+        <!-- Page Summary: Tóm tắt & Xác nhận -->
+        <div class="page" id="pageSummary">
+          <!-- Step 5A: Review Summary before saving -->
+          <div id="summarySection">
+            <div class="text-center mb-4">
+              <div class="text-4xl mb-2">🎉</div>
+              <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
+                Kiểm tra lại buổi hẹn
+              </h2>
+              <p class="text-pink-200/60 text-sm mt-1">
+                Tất cả thông tin sẵn sàng rồi nè! 💕
+              </p>
+            </div>
+
+            <div class="space-y-2 text-left max-w-sm mx-auto mb-6">
+              <div class="confirmation-detail">
+                <span class="icon">💌</span>
+                <div>
+                  <div class="text" id="confirmEmail">em@example.com</div>
+                  <div class="sub">email nhận thư hẹn</div>
+                </div>
+              </div>
+
+              <div class="confirmation-detail">
+                <span class="icon">💡</span>
+                <div>
+                  <div class="text" id="confirmIdea">Đi coffee date (buổi chiều)</div>
+                  <div class="sub">ý tưởng date</div>
+                </div>
+              </div>
+
+              <div class="confirmation-detail" id="confirmFoodWrapper">
+                <span class="icon">🍽️</span>
+                <div>
+                  <div class="text" id="confirmFood">Pasta</div>
+                  <div class="sub">chỗ ăn trước</div>
+                </div>
+              </div>
+
+              <div class="confirmation-detail" id="confirmCoffeeWrapper">
+                <span class="icon">☕</span>
+                <div>
+                  <div class="text" id="confirmCoffee">Cafe mèo</div>
+                  <div class="sub">quán coffee date</div>
+                </div>
+              </div>
+
+              <div class="confirmation-detail">
+                <span class="icon">📅</span>
+                <div>
+                  <div class="text" id="confirmDate">Thứ Bảy, 06 Tháng 9</div>
+                  <div class="sub">ngày hẹn</div>
+                </div>
+              </div>
+
+              <div class="confirmation-detail">
+                <span class="icon">🕒</span>
+                <div>
+                  <div class="text" id="confirmTime">3:00 PM</div>
+                  <div class="sub">thời gian</div>
+                </div>
+              </div>
+
+              <div class="confirmation-detail" id="confirmNotesWrapper">
+                <span class="icon">📝</span>
+                <div>
+                  <div class="text" id="confirmNotes">Quán gần nhà</div>
+                  <div class="sub">lời nhắn gửi</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="submitError" class="text-pink-300 text-xs text-center mb-3 hidden"></div>
+
+            <div class="flex items-center justify-between gap-3">
+              <button class="btn-secondary text-sm px-5" id="summaryBackBtn">
+                ← Chỉnh sửa
+              </button>
+              <button class="btn-primary text-sm px-8" id="submitDateBtn">
+                Chốt kèo hẹn hò 💕
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 5B: Success Screen (Shown after saving to Postgres) -->
+          <div id="successSection" class="text-center relative hidden">
+            <!-- Glow Rings -->
+            <div class="glow-ring glow-ring--pink"></div>
+            <div class="glow-ring glow-ring--purple"></div>
+            <div class="relative z-10">
+              <div class="text-5xl md:text-6xl mb-2 heartbeat">💖</div>
+              <h1
+                class="font-display text-4xl md:text-5xl font-bold text-white mb-2 text-shadow-glow"
+              >
+                YAYYY!!!
+              </h1>
+              <p class="text-pink-300/80 text-base mb-4 font-medium">
+                ✨ Chốt kèo thành công rùiii! ✨
+              </p>
+
+              <div class="p-4 rounded-2xl bg-white/5 border border-pink-500/20 max-w-sm mx-auto mb-5 text-left text-sm space-y-2">
+                <p class="text-white/90">
+                  💌 Vé hẹn hò đã được ghi nhận cho <span class="font-bold text-pink-300" id="successEmail"></span>.
+                </p>
+                <p class="text-white/80">
+                  📅 Hẹn gặp chị vào <span class="font-semibold text-white" id="successDateTime"></span> nha!
+                </p>
+              </div>
+
+              <div class="mt-4">
+                <p class="text-white/90 text-lg font-medium">
+                  Em đang háo hức chờ đến ngày đó lắm 🥰✨
+                </p>
+                <p class="text-white/30 text-xs mt-3 italic max-w-xs mx-auto">
+                  “Normal guys send texts, i made a website.<br />I'm not like other guys xx”
+                </p>
+              </div>
+
+              <div class="mt-6 flex justify-center gap-3">
+                <button class="btn-secondary text-sm" id="resetBtn">
+                  🔄 Bắt đầu lại
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+{
+    "Cafe": {
+        "option binh thuong": {
+            "ten": "Góc vuông",
+            "dia chi": "16 Ng. 6 P. Tôn Thất Tùng, Kim Liên, Hà Nội",
+            "link_map": "https://maps.app.goo.gl/orvnWBFh27oaAP5M9",
+            "anh": "https://maps.app.goo.gl/WWx7hgj6CTCTJtm87"
+        },
+        "cafe meo": {
+            "ten": "Râu thỏ",
+            "dia chi": "9, ngách 5 Ng. 85 P. Nguyễn Lương Bằng, Đống Đa, Hà Nội",
+            "link_map": "https://maps.app.goo.gl/eLB7snk1QF9wpLAn9",
+            "anh": "https://maps.app.goo.gl/MN7n2zPYea9BGBiK8"
+        }
+    },
+    "Quán ăn": {
+        "Pasta": {
+            "ten": "Gusto Pasta Bar",
+            "dia chi": "13B P. Nguyễn Gia Thiều, Cửa Nam, Hà Nội",
+            "link_map": "https://maps.app.goo.gl/qQPXkLVabyC6s3s66",
+            "anh": "https://maps.app.goo.gl/xY5aUcmqCJfbnbjx8"
+        },
+        "Mì cay": {
+            "ten": "Em hum biết",
+            "dia chi": "Em hum biết",
+            "link_map": "",
+            "anh": ""
+        },
+        "Gà rán": {
+            "ten": "Chicken 88",
+            "dia chi": "363 Đ. Nguyễn Khang, Cầu Giấy, Hà Nội",
+            "link_map": "https://maps.app.goo.gl/ea8YmSGq1zGbjLRA8",
+            "anh": "https://maps.app.goo.gl/sNgxNsapAUyX2xDf6"
+        }
+    }
+}
