@@ -11,33 +11,31 @@ html {
 
 body {
   font-family: "Inter", sans-serif;
-  background: #0f0518;
+  background: #120c05;
+  color: #fff;
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
   min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Content can legitimately be taller than the viewport (long calendar +
-     time list on short/narrow screens) - clip horizontally only, and let
-     the page scroll vertically instead of cutting content off. */
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
 }
 
-/* ---------------- Animated Background ---------------- */
+/* ---------------- Animated Warm Golden & Honey Background ---------------- */
 .bg-gradient-animated {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: radial-gradient(ellipse at 20% 50%, #1a0a2e 0%, #0f0518 70%);
+  background: radial-gradient(ellipse at 35% 30%, #261708 0%, #170f05 50%, #0d0803 100%);
   animation: bgPulse 8s ease-in-out infinite alternate;
 }
 
 @keyframes bgPulse {
   0% {
-    opacity: 0.7;
+    opacity: 0.8;
   }
   100% {
     opacity: 1;
@@ -47,37 +45,42 @@ body {
 .bg-orb {
   position: fixed;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.3;
-  animation: orbFloat 12s ease-in-out infinite alternate;
+  filter: blur(130px);
+  opacity: 0.32;
+  animation: orbFloat 14s ease-in-out infinite alternate;
 }
 
-.bg-orb--pink {
-  width: 500px;
-  height: 500px;
-  background: #ff6b9d;
-  top: -100px;
-  right: -100px;
-}
-
-.bg-orb--purple {
-  width: 400px;
-  height: 400px;
-  background: #8b5cf6;
-  bottom: -80px;
-  left: -80px;
-  animation-delay: 4s;
-}
-
+/* Honey Gold */
 .bg-orb--gold {
-  width: 300px;
-  height: 300px;
-  background: #ffd700;
-  top: 50%;
-  left: 50%;
+  width: 520px;
+  height: 520px;
+  background: #f59e0b;
+  top: -120px;
+  right: -100px;
+  opacity: 0.35;
+}
+
+/* Warm Butter Yellow */
+.bg-orb--warm {
+  width: 440px;
+  height: 440px;
+  background: #fbbf24;
+  bottom: -90px;
+  left: -90px;
+  animation-delay: 4s;
+  opacity: 0.28;
+}
+
+/* Caramel Amber */
+.bg-orb--amber {
+  width: 360px;
+  height: 360px;
+  background: #d97706;
+  top: 55%;
+  left: 45%;
   transform: translate(-50%, -50%);
   animation-delay: 8s;
-  opacity: 0.08;
+  opacity: 0.16;
 }
 
 @keyframes orbFloat {
@@ -85,11 +88,11 @@ body {
     transform: translate(0, 0) scale(1);
   }
   100% {
-    transform: translate(40px, 30px) scale(1.2);
+    transform: translate(40px, 30px) scale(1.15);
   }
 }
 
-/* ---------------- Floating Hearts ---------------- */
+/* ---------------- Floating Cat Paws & Emojis ---------------- */
 .hearts-container {
   position: fixed;
   inset: 0;
@@ -100,25 +103,26 @@ body {
 
 .heart-float {
   position: absolute;
-  font-size: 1.2rem;
-  opacity: 0.15;
-  animation: heartRise linear infinite;
+  font-size: 1.25rem;
+  opacity: 0.18;
+  animation: particleRise linear infinite;
   user-select: none;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4));
 }
 
-@keyframes heartRise {
+@keyframes particleRise {
   0% {
-    transform: translateY(100vh) scale(0.6) rotate(0deg);
+    transform: translateY(105vh) scale(0.6) rotate(-10deg);
     opacity: 0;
   }
-  10% {
-    opacity: 0.15;
+  12% {
+    opacity: 0.22;
   }
-  90% {
-    opacity: 0.15;
+  88% {
+    opacity: 0.22;
   }
   100% {
-    transform: translateY(-10vh) scale(1.2) rotate(720deg);
+    transform: translateY(-10vh) scale(1.15) rotate(360deg);
     opacity: 0;
   }
 }
@@ -128,8 +132,8 @@ body {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 480px;
-  padding: 24px 16px;
+  max-width: 490px;
+  padding: 32px 16px 24px;
   margin: 0 auto;
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
@@ -139,23 +143,21 @@ body {
   justify-content: center;
 }
 
-/* ---------------- Glass Card ---------------- */
+/* ---------------- Glass Card With Cat Ears ---------------- */
 .glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(30, 20, 11, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(251, 191, 36, 0.2);
   border-radius: 40px;
   padding: 36px 28px 32px;
   width: 100%;
   box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 30px 80px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(245, 158, 11, 0.1),
+    inset 0 1px 0 rgba(254, 240, 138, 0.18);
   transition: all 0.4s ease;
   position: relative;
-  /* NOTE: intentionally no overflow:hidden here - the card's height is
-     auto/content-driven, so nothing needs clipping, and hiding overflow
-     was cropping the ::before mask ring on some pages. */
 }
 
 .glass-card::before {
@@ -166,8 +168,8 @@ body {
   padding: 1px;
   background: linear-gradient(
     135deg,
-    rgba(255, 107, 157, 0.3),
-    rgba(139, 92, 246, 0.1)
+    rgba(251, 191, 36, 0.45),
+    rgba(245, 158, 11, 0.1)
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -178,6 +180,49 @@ body {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+}
+
+/* Cute Cat Ears atop the card */
+.cat-ears-container {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 48px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cat-ear {
+  width: 44px;
+  height: 32px;
+  background: rgba(36, 23, 12, 0.95);
+  border-top: 2px solid rgba(251, 191, 36, 0.5);
+  border-left: 2px solid rgba(251, 191, 36, 0.4);
+  border-right: 2px solid rgba(251, 191, 36, 0.4);
+  border-radius: 20px 20px 4px 4px;
+  position: relative;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 -4px 16px rgba(245, 158, 11, 0.2);
+}
+
+.cat-ear--left {
+  transform: rotate(-14deg);
+}
+
+.cat-ear--right {
+  transform: rotate(14deg);
+}
+
+.cat-ear::after {
+  content: "";
+  position: absolute;
+  inset: 6px 9px 2px;
+  background: linear-gradient(180deg, #fcd34d 0%, #f59e0b 100%);
+  opacity: 0.65;
+  border-radius: 12px 12px 2px 2px;
 }
 
 /* ---------------- Pages ---------------- */
@@ -206,27 +251,29 @@ body {
   font-family: "Playfair Display", serif;
 }
 
-/* ---------------- Buttons ---------------- */
+/* ---------------- Buttons (Warm Golden / Honey Yellow) ---------------- */
 .btn-primary {
-  background: linear-gradient(135deg, #ff6b9d, #e8557a);
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
   border: none;
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   padding: 14px 32px;
   border-radius: 60px;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 8px 30px rgba(255, 107, 157, 0.35);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.45);
   letter-spacing: 0.3px;
   position: relative;
   overflow: hidden;
   white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 .btn-primary:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 40px rgba(255, 107, 157, 0.5);
+  box-shadow: 0 12px 40px rgba(245, 158, 11, 0.6);
 }
 
 .btn-primary:active {
@@ -238,7 +285,7 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 60px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
   pointer-events: none;
 }
 
@@ -250,9 +297,9 @@ body {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #fff;
+  background: rgba(254, 240, 138, 0.07);
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  color: #fef3c7;
   font-weight: 500;
   padding: 14px 32px;
   border-radius: 60px;
@@ -263,7 +310,9 @@ body {
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(254, 240, 138, 0.15);
+  border-color: rgba(251, 191, 36, 0.4);
+  color: #fff;
   transform: translateY(-2px);
 }
 
@@ -272,9 +321,9 @@ body {
 }
 
 .btn-no {
-  background: rgba(255, 70, 70, 0.15);
-  border: 1px solid rgba(255, 70, 70, 0.25);
-  color: #ff6b6b;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
   font-weight: 600;
   padding: 14px 32px;
   border-radius: 60px;
@@ -286,65 +335,17 @@ body {
 }
 
 .btn-no:hover {
-  background: rgba(255, 70, 70, 0.25);
+  background: rgba(239, 68, 68, 0.22);
   transform: scale(0.95);
 }
 
-/* On touch devices there's no hover, so the "dodge" trick can't work off
-   mouseenter - keep the button reachable and let the tap-counter messages
-   carry the playfulness instead. */
 @media (hover: none) {
   .btn-no-wrapper {
     transform: none !important;
   }
 }
 
-/* ---------------- Food Grid ---------------- */
-.food-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.food-item {
-  background: rgba(255, 255, 255, 0.04);
-  border: 2px solid rgba(255, 255, 255, 0.06);
-  border-radius: 20px;
-  padding: 16px 8px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.food-item:hover {
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-2px);
-}
-
-.food-item.selected {
-  border-color: #ff6b9d;
-  background: rgba(255, 107, 157, 0.15);
-  box-shadow: 0 0 30px rgba(255, 107, 157, 0.15);
-  color: #fff;
-  transform: scale(1.02);
-}
-
-.food-item .emoji {
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.food-item .label {
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  display: block;
-  overflow-wrap: anywhere;
-}
-
-/* ---------------- Calendar ---------------- */
+/* ---------------- Calendar (Warm Honey Accent) ---------------- */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -354,7 +355,7 @@ body {
 .calendar-grid .day-label {
   font-size: 0.65rem;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(254, 240, 138, 0.5);
   font-weight: 600;
   letter-spacing: 0.5px;
   padding: 6px 0;
@@ -369,22 +370,30 @@ body {
   border-radius: 12px;
   font-size: 0.85rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .calendar-grid .day:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(251, 191, 36, 0.15);
   color: #fff;
 }
 
+.calendar-grid .day.today {
+  border: 1.5px solid rgba(251, 191, 36, 0.5);
+  color: #fde047;
+  font-weight: 700;
+}
+
 .calendar-grid .day.selected {
-  background: linear-gradient(135deg, #ff6b9d, #e8557a);
+  background: linear-gradient(135deg, #f59e0b, #d97706);
   color: #fff;
-  box-shadow: 0 4px 20px rgba(255, 107, 157, 0.35);
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
   transform: scale(1.05);
+  border: none;
 }
 
 .calendar-grid .day.empty {
@@ -406,31 +415,31 @@ body {
 }
 
 .calendar-header .month-year {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1rem;
-  color: #fff;
+  color: #fef3c7;
   text-align: center;
   flex: 1;
 }
 
 .calendar-header .nav-btn {
-  background: rgba(255, 255, 255, 0.06);
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
+  background: rgba(254, 240, 138, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.15);
+  color: #fef08a;
   width: 36px;
   height: 36px;
   min-width: 36px;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.25s;
-  font-size: 1rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .calendar-header .nav-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(251, 191, 36, 0.2);
   color: #fff;
 }
 
@@ -443,31 +452,33 @@ body {
 
 .time-item {
   background: rgba(255, 255, 255, 0.04);
-  border: 2px solid rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(251, 191, 36, 0.1);
   border-radius: 14px;
   padding: 10px 6px;
   text-align: center;
   font-size: 0.8rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
   white-space: nowrap;
 }
 
 .time-item:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.3);
   color: #fff;
 }
 
 .time-item.selected {
-  border-color: #ff6b9d;
-  background: rgba(255, 107, 157, 0.15);
+  border-color: #fbbf24;
+  background: rgba(245, 158, 11, 0.22);
   color: #fff;
-  box-shadow: 0 0 20px rgba(255, 107, 157, 0.12);
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
 }
 
-/* ---------------- Confetti ---------------- */
+/* ---------------- Confetti Overlay ---------------- */
 .confetti-overlay {
   position: fixed;
   inset: 0;
@@ -495,31 +506,31 @@ body {
   }
 }
 
-/* ---------------- Misc ---------------- */
+/* ---------------- Glowing Ring & Misc ---------------- */
 .text-shadow-glow {
-  text-shadow: 0 0 40px rgba(255, 107, 157, 0.3);
+  text-shadow: 0 0 40px rgba(245, 158, 11, 0.45);
 }
 
 .glow-ring {
   position: absolute;
   border-radius: 50%;
   filter: blur(60px);
-  opacity: 0.15;
+  opacity: 0.2;
   animation: ringPulse 3s ease-in-out infinite alternate;
 }
 
-.glow-ring--pink {
-  width: 300px;
-  height: 300px;
-  background: #ff6b9d;
+.glow-ring--gold {
+  width: 320px;
+  height: 320px;
+  background: #f59e0b;
   top: -80px;
   right: -80px;
 }
 
-.glow-ring--purple {
-  width: 200px;
-  height: 200px;
-  background: #8b5cf6;
+.glow-ring--warm {
+  width: 240px;
+  height: 240px;
+  background: #fbbf24;
   bottom: -60px;
   left: -60px;
   animation-delay: 1.5s;
@@ -527,11 +538,11 @@ body {
 
 @keyframes ringPulse {
   0% {
-    opacity: 0.08;
+    opacity: 0.12;
     transform: scale(1);
   }
   100% {
-    opacity: 0.2;
+    opacity: 0.28;
     transform: scale(1.2);
   }
 }
@@ -540,7 +551,7 @@ body {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 16px;
   padding: 12px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(251, 191, 36, 0.14);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -555,14 +566,14 @@ body {
 }
 
 .confirmation-detail .text {
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  color: #fff;
   overflow-wrap: anywhere;
 }
 
 .confirmation-detail .sub {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(254, 240, 138, 0.5);
 }
 
 .heartbeat {
@@ -601,274 +612,19 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(254, 240, 138, 0.15);
   transition: all 0.4s ease;
 }
 
 .progress-dots .dot.active {
-  background: #ff6b9d;
-  box-shadow: 0 0 16px rgba(255, 107, 157, 0.4);
+  background: #f59e0b;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.6);
   width: 24px;
   border-radius: 4px;
 }
 
 .progress-dots .dot.done {
-  background: rgba(255, 107, 157, 0.3);
-}
-
-/* ---------------- Responsive ---------------- */
-
-/* Extra-small phones (older/small Android, iPhone SE-and-below) */
-@media (max-width: 359px) {
-  .app-container {
-    padding: 16px 10px;
-  }
-
-  .glass-card {
-    padding: 22px 14px 20px;
-    border-radius: 24px;
-  }
-
-  .progress-dots {
-    margin-bottom: 16px;
-  }
-
-  .food-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-
-  .food-item {
-    padding: 10px 4px;
-    border-radius: 14px;
-  }
-
-  .food-item .emoji {
-    font-size: 1.5rem;
-  }
-
-  .food-item .label {
-    font-size: 0.68rem;
-  }
-
-  .calendar-grid {
-    gap: 3px;
-  }
-
-  .calendar-grid .day,
-  .calendar-grid .day-label {
-    font-size: 0.65rem;
-  }
-
-  .calendar-grid .day {
-    border-radius: 8px;
-  }
-
-  .calendar-header .month-year {
-    font-size: 0.85rem;
-  }
-
-  .calendar-header .nav-btn {
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    font-size: 0.85rem;
-  }
-
-  .time-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-  }
-
-  .time-item {
-    padding: 8px 4px;
-    font-size: 0.72rem;
-    border-radius: 10px;
-  }
-
-  .btn-primary,
-  .btn-secondary,
-  .btn-no {
-    padding: 11px 20px;
-    font-size: 0.85rem;
-  }
-}
-
-/* Small phones */
-@media (min-width: 360px) and (max-width: 420px) {
-  .glass-card {
-    padding: 28px 18px 24px;
-    border-radius: 28px;
-  }
-
-  .food-grid {
-    gap: 8px;
-  }
-
-  .food-item {
-    padding: 12px 4px;
-    border-radius: 16px;
-  }
-
-  .food-item .emoji {
-    font-size: 1.6rem;
-  }
-
-  .food-item .label {
-    font-size: 0.7rem;
-  }
-
-  .time-grid {
-    gap: 6px;
-  }
-
-  .time-item {
-    padding: 8px 4px;
-    font-size: 0.72rem;
-    border-radius: 12px;
-  }
-
-  .calendar-grid .day {
-    font-size: 0.75rem;
-    border-radius: 10px;
-  }
-
-  .btn-primary,
-  .btn-secondary,
-  .btn-no {
-    padding: 12px 24px;
-    font-size: 0.9rem;
-  }
-}
-
-/* Short viewports (landscape phones) - tighten vertical rhythm so the
-   calendar + time grid + button don't force excessive scrolling */
-@media (max-height: 600px) and (orientation: landscape) {
-  .app-container {
-    padding: 14px 16px;
-    align-items: flex-start;
-  }
-
-  .glass-card {
-    padding: 20px 24px;
-  }
-
-  .progress-dots {
-    margin-bottom: 14px;
-  }
-
-  .food-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .time-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
-@media (min-width: 421px) and (max-width: 767px) {
-  .food-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 768px) {
-  .app-container {
-    max-width: 560px;
-    padding: 24px;
-  }
-
-  .glass-card {
-    padding: 48px 40px 40px;
-    border-radius: 48px;
-  }
-
-  .food-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
-
-  .food-item {
-    padding: 20px 12px;
-    border-radius: 24px;
-  }
-
-  .food-item .emoji {
-    font-size: 2.4rem;
-  }
-
-  .food-item .label {
-    font-size: 0.9rem;
-  }
-
-  .time-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-  }
-
-  .time-item {
-    padding: 12px 8px;
-    font-size: 0.9rem;
-    border-radius: 16px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .app-container {
-    max-width: 640px;
-    padding: 32px;
-  }
-
-  .glass-card {
-    padding: 56px 48px 44px;
-    border-radius: 56px;
-  }
-
-  .food-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-  }
-
-  .time-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
-}
-
-/* Respect reduced-motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Hide scrollbar (visual only - scrolling itself stays enabled) */
-::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-* {
-  scrollbar-width: none;
-}
-
-.animate-bounce-slow {
-  animation: bounceSlow 2s infinite;
-}
-
-@keyframes bounceSlow {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  background: rgba(245, 158, 11, 0.35);
 }
 
 /* ---------------- Form Controls & Inputs ---------------- */
@@ -879,8 +635,8 @@ body {
 .input-label {
   display: block;
   font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  color: #fef08a;
   margin-bottom: 6px;
 }
 
@@ -895,13 +651,13 @@ body {
   left: 16px;
   font-size: 1.1rem;
   pointer-events: none;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .custom-input {
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
-  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(251, 191, 36, 0.2);
   border-radius: 16px;
   padding: 14px 16px 14px 44px;
   color: #fff;
@@ -912,17 +668,17 @@ body {
 }
 
 .custom-input:focus {
-  border-color: #ff6b9d;
-  background: rgba(255, 107, 157, 0.08);
-  box-shadow: 0 0 25px rgba(255, 107, 157, 0.25);
+  border-color: #fbbf24;
+  background: rgba(245, 158, 11, 0.1);
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
 }
 
 .custom-input::placeholder {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .input-error-msg {
-  color: #ff8fa3;
+  color: #fca5a5;
   font-size: 0.78rem;
   margin-top: 6px;
 }
@@ -930,7 +686,7 @@ body {
 .custom-textarea {
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
-  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(251, 191, 36, 0.2);
   border-radius: 16px;
   padding: 12px 14px;
   color: #fff;
@@ -943,13 +699,13 @@ body {
 }
 
 .custom-textarea:focus {
-  border-color: #ff6b9d;
-  background: rgba(255, 107, 157, 0.08);
-  box-shadow: 0 0 25px rgba(255, 107, 157, 0.2);
+  border-color: #fbbf24;
+  background: rgba(245, 158, 11, 0.1);
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
 }
 
 .custom-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /* ---------------- Date Idea Cards ---------------- */
@@ -962,7 +718,7 @@ body {
   align-items: center;
   gap: 14px;
   background: rgba(255, 255, 255, 0.04);
-  border: 2px solid rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(251, 191, 36, 0.12);
   border-radius: 20px;
   padding: 14px 16px;
   cursor: pointer;
@@ -973,14 +729,14 @@ body {
 
 .idea-card:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 107, 157, 0.4);
+  border-color: rgba(251, 191, 36, 0.45);
   transform: translateY(-2px);
 }
 
 .idea-card.selected {
-  border-color: #ff6b9d;
-  background: rgba(255, 107, 157, 0.14);
-  box-shadow: 0 8px 30px rgba(255, 107, 157, 0.22);
+  border-color: #fbbf24;
+  background: rgba(245, 158, 11, 0.18);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.28);
   transform: scale(1.01);
 }
 
@@ -993,7 +749,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(254, 240, 138, 0.1);
 }
 
 .idea-content {
@@ -1008,8 +764,9 @@ body {
   letter-spacing: 0.5px;
   padding: 2px 8px;
   border-radius: 20px;
-  background: rgba(255, 107, 157, 0.2);
-  color: #ffb3c6;
+  background: rgba(245, 158, 11, 0.25);
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.35);
   margin-bottom: 4px;
 }
 
@@ -1022,7 +779,7 @@ body {
 
 .idea-desc {
   font-size: 0.76rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(254, 243, 199, 0.65);
   margin-top: 3px;
   line-height: 1.35;
 }
@@ -1032,7 +789,7 @@ body {
   height: 24px;
   min-width: 24px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border: 1.5px solid rgba(251, 191, 36, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1042,10 +799,197 @@ body {
 }
 
 .idea-card.selected .idea-check {
-  background: #ff6b9d;
-  border-color: #ff6b9d;
+  background: #f59e0b;
+  border-color: #fbbf24;
   color: #fff;
-  box-shadow: 0 0 10px rgba(255, 107, 157, 0.6);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.7);
+}
+
+/* ---------------- Dynamic Choice Cards (Coffee & Food) ---------------- */
+.choice-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.choice-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 420px) {
+  .choice-grid-3 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.choice-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(251, 191, 36, 0.12);
+  border-radius: 16px;
+  padding: 12px 10px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  text-align: center;
+  position: relative;
+  user-select: none;
+}
+
+.choice-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(251, 191, 36, 0.45);
+  transform: translateY(-2px);
+}
+
+.choice-card.selected {
+  border-color: #fbbf24;
+  background: rgba(245, 158, 11, 0.18);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+  transform: scale(1.02);
+}
+
+.choice-card .choice-icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.choice-card .choice-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.choice-card .choice-sub {
+  font-size: 0.68rem;
+  color: rgba(254, 243, 199, 0.6);
+  margin-top: 3px;
+  line-height: 1.25;
+}
+
+.choice-badge-indicator {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: transparent;
+  transition: all 0.2s;
+}
+
+.choice-card.selected .choice-badge-indicator {
+  background: #f59e0b;
+  border-color: #fbbf24;
+  color: #fff;
+}
+
+/* ---------------- Spotlight Venue Preview Card ---------------- */
+.venue-preview-card {
+  background: rgba(34, 22, 12, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 20px;
+  padding: 16px;
+  margin-top: 14px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(245, 158, 11, 0.12);
+  animation: previewSlideDown 0.35s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  text-align: left;
+}
+
+@keyframes previewSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.venue-preview-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fde68a;
+  background: rgba(245, 158, 11, 0.25);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.venue-preview-img-wrapper {
+  width: 100%;
+  height: 190px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.venue-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.venue-preview-card:hover .venue-preview-img {
+  transform: scale(1.03);
+}
+
+.venue-preview-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.venue-preview-addr {
+  font-size: 0.8rem;
+  color: rgba(254, 243, 199, 0.75);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.venue-preview-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.35), rgba(217, 119, 6, 0.25));
+  border: 1px solid rgba(251, 191, 36, 0.55);
+  border-radius: 30px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.venue-preview-map-btn:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.45), rgba(217, 119, 6, 0.35));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+  color: #fff;
 }
 
 /* ---------------- Loading States ---------------- */
@@ -1076,216 +1020,60 @@ body {
   }
 }
 
-/* ---------------- Dynamic Choice Cards (Coffee & Food) ---------------- */
-.choice-section-title {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 2px;
+.animate-bounce-slow {
+  animation: bounceSlow 2.2s infinite ease-in-out;
 }
 
-.choice-section-desc {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 8px;
-}
-
-.choice-grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.choice-grid-4 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-@media (min-width: 480px) {
-  .choice-grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.choice-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 12px 10px;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
-  text-align: center;
-  position: relative;
-  user-select: none;
-}
-
-.choice-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 107, 157, 0.4);
-  transform: translateY(-2px);
-}
-
-.choice-card.selected {
-  border-color: #ff6b9d;
-  background: rgba(255, 107, 157, 0.16);
-  box-shadow: 0 4px 20px rgba(255, 107, 157, 0.25);
-  transform: scale(1.02);
-}
-
-.choice-card .choice-icon {
-  font-size: 1.8rem;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.choice-card .choice-title {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.2;
-}
-
-.choice-card .choice-sub {
-  font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 3px;
-  line-height: 1.25;
-}
-
-.choice-badge-indicator {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.6rem;
-  color: transparent;
-  transition: all 0.2s;
-}
-
-.choice-card.selected .choice-badge-indicator {
-  background: #ff6b9d;
-  border-color: #ff6b9d;
-  color: #fff;
-}
-
-.choice-grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-@media (max-width: 420px) {
-  .choice-grid-3 {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
-/* ---------------- Spotlight Venue Preview Card ---------------- */
-.venue-preview-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 107, 157, 0.3);
-  border-radius: 20px;
-  padding: 16px;
-  margin-top: 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  animation: previewSlideDown 0.35s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-  text-align: left;
-}
-
-@keyframes previewSlideDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.98);
-  }
+@keyframes bounceSlow {
+  0%,
   100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
 
-.venue-preview-tag {
-  display: inline-block;
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #ffb3c6;
-  background: rgba(255, 107, 157, 0.2);
-  padding: 2px 8px;
-  border-radius: 20px;
-  margin-bottom: 8px;
+/* ---------------- Responsive ---------------- */
+@media (max-width: 359px) {
+  .app-container {
+    padding: 20px 10px;
+  }
+  .glass-card {
+    padding: 24px 14px 20px;
+    border-radius: 28px;
+  }
+  .cat-ears-container {
+    padding: 0 28px;
+    top: -18px;
+  }
+  .cat-ear {
+    width: 36px;
+    height: 26px;
+  }
+  .btn-primary,
+  .btn-secondary,
+  .btn-no {
+    padding: 11px 20px;
+    font-size: 0.85rem;
+  }
 }
 
-.venue-preview-img-wrapper {
-  width: 100%;
-  height: 190px;
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: 12px;
-  background: rgba(0, 0, 0, 0.2);
-  position: relative;
+@media (min-width: 768px) {
+  .app-container {
+    max-width: 540px;
+    padding: 32px 24px;
+  }
+  .glass-card {
+    padding: 44px 36px 36px;
+  }
 }
 
-.venue-preview-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
+/* Hide scrollbar */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
-
-.venue-preview-card:hover .venue-preview-img {
-  transform: scale(1.03);
+* {
+  scrollbar-width: none;
 }
-
-.venue-preview-name {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.venue-preview-addr {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 12px;
-  line-height: 1.4;
-}
-
-.venue-preview-map-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: linear-gradient(135deg, rgba(255, 107, 157, 0.25), rgba(232, 85, 122, 0.2));
-  border: 1px solid rgba(255, 107, 157, 0.5);
-  border-radius: 30px;
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.25s;
-}
-
-.venue-preview-map-btn:hover {
-  background: linear-gradient(135deg, rgba(255, 107, 157, 0.4), rgba(232, 85, 122, 0.35));
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
-  color: #fff;
-}
-
-

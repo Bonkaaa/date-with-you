@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>💌 Danh Sách Phản Hồi Hẹn Hò - Admin Dashboard</title>
+    <title>🐱 Danh Sách Phản Hồi Hẹn Hò - Admin Dashboard 🐾</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -23,17 +23,18 @@
         z-index: 1;
       }
       .response-card {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(30, 20, 11, 0.72);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(251, 191, 36, 0.2);
         border-radius: 24px;
         padding: 24px;
         transition: all 0.3s;
       }
       .response-card:hover {
-        border-color: rgba(255, 107, 157, 0.4);
+        border-color: rgba(251, 191, 36, 0.45);
         transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(245, 158, 11, 0.15);
       }
       .badge-pill {
         display: inline-block;
@@ -46,19 +47,20 @@
     </style>
   </head>
   <body class="text-white">
-    <!-- Animated Background Layers -->
+    <!-- Animated Warm Golden Background Layers -->
     <div class="bg-gradient-animated"></div>
-    <div class="bg-orb bg-orb--pink"></div>
-    <div class="bg-orb bg-orb--purple"></div>
+    <div class="bg-orb bg-orb--gold"></div>
+    <div class="bg-orb bg-orb--warm"></div>
+    <div class="bg-orb bg-orb--amber"></div>
 
     <div class="admin-container">
       <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 pb-4 border-b border-white/10">
         <div>
           <h1 class="font-display text-3xl md:text-4xl font-bold flex items-center gap-3">
-            <span>💌</span> Danh Sách Phản Hồi Hẹn Hò
+            <span>🐱🐾</span> Danh Sách Phản Hồi Hẹn Hò
           </h1>
-          <p class="text-pink-200/60 text-sm mt-1">
-            Xem ngay các buổi hẹn mà người ấy đã chốt kèo 💕
+          <p class="text-amber-200/70 text-sm mt-1">
+            Xem ngay các buổi hẹn mà người ấy đã chốt kèo 🐾💛
           </p>
         </div>
         <div class="flex items-center gap-3">
@@ -70,7 +72,7 @@
           </a>
           <button
             id="refreshBtn"
-            class="px-5 py-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-sm font-semibold shadow-lg shadow-pink-500/20 transition flex items-center gap-2"
+            class="px-5 py-2 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-sm font-semibold shadow-lg shadow-amber-500/25 transition flex items-center gap-2 text-white"
           >
             <span>🔄</span> Làm mới
           </button>
@@ -80,11 +82,11 @@
       <!-- Stats Bar -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         <div class="response-card text-center py-4">
-          <div class="text-3xl font-extrabold text-pink-400" id="totalCount">0</div>
+          <div class="text-3xl font-extrabold text-amber-400" id="totalCount">0</div>
           <div class="text-white/60 text-xs mt-1 uppercase tracking-wider">Tổng số phản hồi</div>
         </div>
         <div class="response-card text-center py-4">
-          <div class="text-3xl font-extrabold text-purple-300" id="latestDate">-</div>
+          <div class="text-3xl font-extrabold text-yellow-300" id="latestDate">-</div>
           <div class="text-white/60 text-xs mt-1 uppercase tracking-wider">Ngày hẹn mới nhất</div>
         </div>
         <div class="response-card text-center py-4">
@@ -95,18 +97,18 @@
 
       <!-- Loading and Empty States -->
       <div id="loadingIndicator" class="text-center py-16">
-        <div class="text-4xl animate-bounce mb-3">💖</div>
-        <p class="text-white/60 text-sm">Đang tải dữ liệu từ PostgreSQL...</p>
+        <div class="text-4xl animate-bounce mb-3">🐱🐾</div>
+        <p class="text-amber-200/70 text-sm">Đang tải dữ liệu từ PostgreSQL...</p>
       </div>
 
       <div id="emptyState" class="hidden text-center py-16 response-card">
-        <div class="text-5xl mb-3">📭</div>
-        <h3 class="text-xl font-bold mb-1">Chưa có phản hồi nào</h3>
-        <p class="text-white/50 text-sm max-w-sm mx-auto mb-4">
+        <div class="text-5xl mb-3">📭🐾</div>
+        <h3 class="text-xl font-bold mb-1 text-amber-100">Chưa có phản hồi nào</h3>
+        <p class="text-white/60 text-sm max-w-sm mx-auto mb-4">
           Hãy gửi đường link web cho người ấy để nhận câu trả lời ngọt ngào đầu tiên nhé!
         </p>
         <a href="/" class="btn-primary inline-block text-sm px-6 py-2.5">
-          Mở trang web date 💕
+          Mở trang web date 💛🐾
         </a>
       </div>
 
@@ -150,44 +152,44 @@
                 <div class="response-card">
                   <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
                     <div class="flex items-center gap-3">
-                      <span class="w-8 h-8 rounded-full bg-pink-500/20 text-pink-300 font-bold flex items-center justify-center text-sm">
+                      <span class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-300 font-bold flex items-center justify-center text-sm border border-amber-500/30">
                         #${data.length - idx}
                       </span>
                       <div>
                         <div class="font-bold text-lg text-white flex items-center gap-2">
                           <span>💌</span> ${escapeHtml(item.email)}
                         </div>
-                        <div class="text-xs text-white/40">Gửi lúc: ${createdDate}</div>
+                        <div class="text-xs text-amber-200/50">Gửi lúc: ${createdDate}</div>
                       </div>
                     </div>
-                    <span class="badge-pill bg-pink-500/20 text-pink-300 border border-pink-500/30">
+                    <span class="badge-pill bg-amber-500/20 text-amber-300 border border-amber-500/30">
                       ${escapeHtml(item.date_idea)}
                     </span>
                   </div>
 
                   <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-sm">
-                    <div class="bg-white/5 p-3 rounded-xl">
-                      <span class="text-white/40 text-xs block mb-1">📅 Ngày hẹn</span>
-                      <span class="font-semibold text-pink-200">${item.selected_date}</span>
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                      <span class="text-amber-200/60 text-xs block mb-1">📅 Ngày hẹn</span>
+                      <span class="font-semibold text-amber-200">${item.selected_date}</span>
                     </div>
-                    <div class="bg-white/5 p-3 rounded-xl">
-                      <span class="text-white/40 text-xs block mb-1">🕒 Giờ hẹn</span>
-                      <span class="font-semibold text-purple-200">${escapeHtml(item.selected_time)}</span>
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                      <span class="text-amber-200/60 text-xs block mb-1">🕒 Giờ hẹn</span>
+                      <span class="font-semibold text-yellow-200">${escapeHtml(item.selected_time)}</span>
                     </div>
-                    <div class="bg-white/5 p-3 rounded-xl">
-                      <span class="text-white/40 text-xs block mb-1">☕ Quán Cafe</span>
-                      <span class="font-semibold text-amber-200">${escapeHtml(item.coffee_type || "Chưa có")}</span>
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                      <span class="text-amber-200/60 text-xs block mb-1">☕ Quán Cafe</span>
+                      <span class="font-semibold text-amber-300">${escapeHtml(item.coffee_type || "Chưa có")}</span>
                     </div>
-                    <div class="bg-white/5 p-3 rounded-xl">
-                      <span class="text-white/40 text-xs block mb-1">🍽️ Món ăn trước</span>
-                      <span class="font-semibold text-emerald-200">${escapeHtml(item.food_preference || "Không ăn trước")}</span>
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                      <span class="text-amber-200/60 text-xs block mb-1">🍽️ Món ăn trước</span>
+                      <span class="font-semibold text-orange-200">${escapeHtml(item.food_preference || "Không ăn trước")}</span>
                     </div>
                   </div>
 
                   ${item.notes ? `
-                    <div class="mt-3 p-3 rounded-xl bg-pink-500/10 border border-pink-500/20 text-xs">
-                      <span class="text-pink-300 font-semibold block mb-1">📝 Lời nhắn gửi:</span>
-                      <span class="text-white/80">${escapeHtml(item.notes)}</span>
+                    <div class="mt-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/25 text-xs">
+                      <span class="text-amber-300 font-semibold block mb-1">📝 Lời nhắn gửi:</span>
+                      <span class="text-white/90">${escapeHtml(item.notes)}</span>
                     </div>
                   ` : ''}
                 </div>

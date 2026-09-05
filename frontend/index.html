@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>💕 Lời Mời Đi Date - A Date With You</title>
+    <title>🐱 Lời Mời Đi Date - A Date With You 🐾</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,13 +23,13 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <!-- Animated Background Layers -->
+    <!-- Animated Warm Golden Background Layers -->
     <div class="bg-gradient-animated"></div>
-    <div class="bg-orb bg-orb--pink"></div>
-    <div class="bg-orb bg-orb--purple"></div>
     <div class="bg-orb bg-orb--gold"></div>
+    <div class="bg-orb bg-orb--warm"></div>
+    <div class="bg-orb bg-orb--amber"></div>
 
-    <!-- Floating Hearts Container -->
+    <!-- Floating Cat Paws & Emojis Container -->
     <div class="hearts-container" id="heartsContainer"></div>
 
     <!-- Confetti Overlay -->
@@ -38,30 +38,36 @@
     <!-- Main App Container -->
     <div class="app-container">
       <div class="glass-card" id="appCard">
+        <!-- Adorable Cat Ears peaking at the top of the card -->
+        <div class="cat-ears-container">
+          <div class="cat-ear cat-ear--left"></div>
+          <div class="cat-ear cat-ear--right"></div>
+        </div>
+
         <!-- Dynamic Progress Indicator Dots -->
         <div class="progress-dots" id="progressDots"></div>
 
         <!-- Page 1: The Question -->
         <div class="page active" id="page1">
           <div class="text-center">
-            <div class="text-5xl mb-3 animate-bounce-slow">👋💕</div>
-            <p class="text-pink-300 font-semibold text-sm sm:text-base mb-1 tracking-wide">
-              Helloo chị, Kiên của chị đâyy ✨
+            <div class="text-5xl mb-3 animate-bounce-slow">🐱✨</div>
+            <p class="text-amber-300 font-semibold text-sm sm:text-base mb-1 tracking-wide">
+              Helloo chị, Kiên của chị đâyy 🐾
             </p>
             <h1
               class="font-display text-2xl md:text-3xl font-bold text-white mb-2 leading-snug"
             >
-              Chúng ta sẽ đi first date nhé,<br />đượt khum! 💕
+              Chúng ta sẽ đi first date nhé,<br />đượt khum! 🐾
             </h1>
-            <p class="text-pink-200/80 text-sm mb-2 font-medium">
-              Đi date với thằng em xã hội của chị nhó 🥰👉👈
+            <p class="text-amber-200/90 text-sm mb-2 font-medium">
+              Đi date với thằng em xã hội (hệ mèo) của chị nhó 🐱👉👈
             </p>
-            <p class="text-white/30 text-xs mb-8">✨ be honest - trả lời thật lòng nha ✨</p>
+            <p class="text-amber-100/40 text-xs mb-8">✨ be honest - trả lời thật lòng nha mèooo ✨</p>
             <div
               class="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <button class="btn-primary text-lg px-10" id="yesBtn">
-                Okii ❤️
+                Okii luông 💛🐾
               </button>
               <div class="btn-no-wrapper">
                 <button class="btn-no text-lg px-8" id="noBtn">Không ❌</button>
@@ -69,9 +75,9 @@
             </div>
             <div
               id="noMessage"
-              class="mt-6 text-pink-300/80 text-sm font-medium hidden transition-all"
+              class="mt-6 text-amber-300 text-sm font-medium hidden transition-all"
             >
-              🥺 are you sure? Nghĩ lại xíu điii... 💕
+              🥺 Meowww... chị nỡ từ chối chú mèo này saooo? Nghĩ lại xíu điii... 🐾
             </div>
           </div>
         </div>
@@ -79,18 +85,18 @@
         <!-- Page 2: Email Input -->
         <div class="page" id="page2">
           <div class="text-center mb-6">
-            <div class="text-4xl mb-3">💌</div>
+            <div class="text-4xl mb-3">💌🐾</div>
             <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
               Cho em xin email nha!
             </h2>
-            <p class="text-pink-200/60 text-sm mt-1">
-              Để em gửi vé hẹn hò & thư xác nhận đặc biệt cho chị nhé ✨
+            <p class="text-amber-200/75 text-sm mt-1">
+              Để em gửi vé hẹn hò & thư xác nhận đặc biệt cho chị nhé 🐱✨
             </p>
           </div>
 
           <div class="space-y-4 max-w-sm mx-auto">
             <div class="input-group">
-              <label for="emailInput" class="input-label">Email của chị</label>
+              <label for="emailInput" class="input-label">Email của chị 🐾</label>
               <div class="input-wrapper">
                 <span class="input-icon">📮</span>
                 <input
@@ -112,7 +118,7 @@
                 ← Quay lại
               </button>
               <button class="btn-primary text-sm px-8" id="emailNextBtn">
-                Tiếp tục ✨
+                Tiếp tục 🐾
               </button>
             </div>
           </div>
@@ -121,12 +127,12 @@
         <!-- Page 3: Date Idea Selection (2 Options) -->
         <div class="page" id="page3">
           <div class="text-center mb-5">
-            <div class="text-4xl mb-2">✨</div>
+            <div class="text-4xl mb-2">🐾✨</div>
             <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
               Ý tưởng buổi hẹn
             </h2>
-            <p class="text-pink-200/60 text-sm mt-1">
-              Chị thích kiểu hẹn hò nào nhất dưới đây nè? 💖
+            <p class="text-amber-200/75 text-sm mt-1">
+              Chị thích kiểu hẹn hò nào nhất dưới đây nè? 🐱💛
             </p>
           </div>
 
@@ -166,8 +172,8 @@
             </div>
           </div>
 
-          <p id="ideaError" class="text-pink-300/60 text-xs mt-3 text-center hidden">
-            Chọn một ý tưởng chị thích nhé!
+          <p id="ideaError" class="text-amber-300/80 text-xs mt-3 text-center hidden">
+            Chọn một ý tưởng chị thích nhé! 🐾
           </p>
 
           <div class="flex items-center justify-between gap-3 mt-6">
@@ -175,20 +181,20 @@
               ← Quay lại
             </button>
             <button class="btn-primary text-sm px-8" id="ideaNextBtn" disabled>
-              Tiếp tục ✨
+              Tiếp tục 🐾
             </button>
           </div>
         </div>
 
-        <!-- Page Food: Chọn Món Ăn Trước (Chỉ hiển thị khi chọn Đi ăn trước và coffee date) -->
+        <!-- Page Food: Chọn Món Ăn Trước -->
         <div class="page" id="pageFood">
           <div class="text-center mb-5">
-            <div class="text-4xl mb-2">🍽️</div>
+            <div class="text-4xl mb-2">🍽️🐾</div>
             <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
               Ăn gì trước nè?
             </h2>
-            <p class="text-pink-200/60 text-sm mt-1">
-              Chọn món ngon lấp đầy chiếc bụng đói trước nha! 😋
+            <p class="text-amber-200/75 text-sm mt-1">
+              Chọn món ngon lấp đầy chiếc bụng đói trước nha! 😋🐾
             </p>
           </div>
 
@@ -216,8 +222,8 @@
           <!-- Spotlight Preview for Food -->
           <div id="foodPreviewContainer" class="hidden"></div>
 
-          <p id="foodError" class="text-pink-300/80 text-xs mt-3 text-center hidden">
-            Chị chọn 1 món muốn ăn nha!
+          <p id="foodError" class="text-amber-300/80 text-xs mt-3 text-center hidden">
+            Chị chọn 1 món muốn ăn nha! 🐾
           </p>
 
           <div class="flex items-center justify-between gap-3 mt-6">
@@ -225,20 +231,20 @@
               ← Quay lại
             </button>
             <button class="btn-primary text-sm px-8" id="foodNextBtn" disabled>
-              Tiếp tục ☕
+              Tiếp tục ☕🐾
             </button>
           </div>
         </div>
 
-        <!-- Page Coffee: Chọn Quán Coffee Date (Tách riêng biệt) -->
+        <!-- Page Coffee: Chọn Quán Coffee Date -->
         <div class="page" id="pageCoffee">
           <div class="text-center mb-5">
-            <div class="text-4xl mb-2">☕</div>
+            <div class="text-4xl mb-2">☕🐾</div>
             <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
               Chọn quán coffee date
             </h2>
-            <p class="text-pink-200/60 text-sm mt-1">
-              Chị thích không gian cafe kiểu nào nè? ✨
+            <p class="text-amber-200/75 text-sm mt-1">
+              Chị thích không gian cafe kiểu nào nè? ✨🐱
             </p>
           </div>
 
@@ -253,15 +259,15 @@
               <div class="choice-badge-indicator">✓</div>
               <span class="choice-icon">🐱</span>
               <div class="choice-title">Cafe mèo</div>
-              <div class="choice-sub">Râu Thỏ • Mấy bé mèo cưng xỉu</div>
+              <div class="choice-sub">Râu Thỏ • Mấy bé mèo cưng xỉu 🐾</div>
             </div>
           </div>
 
           <!-- Spotlight Preview for Coffee -->
           <div id="coffeePreviewContainer" class="hidden"></div>
 
-          <p id="coffeeError" class="text-pink-300/80 text-xs mt-3 text-center hidden">
-            Chị chọn 1 kiểu quán cafe nhé!
+          <p id="coffeeError" class="text-amber-300/80 text-xs mt-3 text-center hidden">
+            Chị chọn 1 kiểu quán cafe nhé! 🐾
           </p>
 
           <div class="flex items-center justify-between gap-3 mt-6">
@@ -269,19 +275,19 @@
               ← Quay lại
             </button>
             <button class="btn-primary text-sm px-8" id="coffeeNextBtn" disabled>
-              Tiếp tục 📅
+              Tiếp tục 📅🐾
             </button>
           </div>
         </div>
 
-        <!-- Page DateTime: Chọn Ngày, Giờ & Lời nhắn (Tách riêng biệt) -->
+        <!-- Page DateTime: Chọn Ngày, Giờ & Lời nhắn -->
         <div class="page" id="pageDateTime">
           <div class="text-center mb-4">
             <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
               Thời gian & Lời nhắn
             </h2>
-            <p class="text-pink-200/60 text-sm mt-1" id="dateTimeSubtitle">
-              Chọn ngày và khung giờ hẹn phù hợp với chị nhé 📅
+            <p class="text-amber-200/75 text-sm mt-1" id="dateTimeSubtitle">
+              Chọn ngày và khung giờ hẹn phù hợp với chị nhé 📅🐾
             </p>
           </div>
 
@@ -304,10 +310,10 @@
           <!-- Time Slots -->
           <div class="mb-4">
             <p
-              class="text-white/60 text-xs font-medium uppercase tracking-wider mb-2"
+              class="text-amber-200/75 text-xs font-semibold uppercase tracking-wider mb-2"
               id="timeSectionTitle"
             >
-              Chọn khung giờ 🕒
+              Chọn khung giờ 🕒🐾
             </p>
             <div class="time-grid" id="timeGrid">
               <!-- JS rendered -->
@@ -317,7 +323,7 @@
           <!-- Special Notes / Venue Wish -->
           <div class="mb-4">
             <label for="notesInput" class="input-label"
-              >Ghi chú thêm / Quán quen chị thích (tuỳ chọn)</label
+              >Ghi chú thêm / Quán quen chị thích (tuỳ chọn) 🐾</label
             >
             <textarea
               id="notesInput"
@@ -327,8 +333,8 @@
             ></textarea>
           </div>
 
-          <p id="dateTimeError" class="text-pink-300/80 text-xs mb-3 text-center hidden">
-            Vui lòng chọn ngày và khung giờ hẹn nhé!
+          <p id="dateTimeError" class="text-amber-300/80 text-xs mb-3 text-center hidden">
+            Vui lòng chọn ngày và khung giờ hẹn nhé! 🐾
           </p>
 
           <div class="flex items-center justify-between gap-3">
@@ -336,7 +342,7 @@
               ← Quay lại
             </button>
             <button class="btn-primary text-sm px-8" id="dateTimeNextBtn" disabled>
-              Xem lại lịch hẹn ✨
+              Xem lại lịch hẹn 🐾
             </button>
           </div>
         </div>
@@ -346,12 +352,12 @@
           <!-- Step 5A: Review Summary before saving -->
           <div id="summarySection">
             <div class="text-center mb-4">
-              <div class="text-4xl mb-2">🎉</div>
+              <div class="text-4xl mb-2">🎉🐾</div>
               <h2 class="font-display text-2xl md:text-3xl font-bold text-white">
                 Kiểm tra lại buổi hẹn
               </h2>
-              <p class="text-pink-200/60 text-sm mt-1">
-                Tất cả thông tin sẵn sàng rồi nè! 💕
+              <p class="text-amber-200/75 text-sm mt-1">
+                Tất cả thông tin sẵn sàng rồi nè! 🐱💛
               </p>
             </div>
 
@@ -413,14 +419,14 @@
               </div>
             </div>
 
-            <div id="submitError" class="text-pink-300 text-xs text-center mb-3 hidden"></div>
+            <div id="submitError" class="text-amber-300 text-xs text-center mb-3 hidden"></div>
 
             <div class="flex items-center justify-between gap-3">
               <button class="btn-secondary text-sm px-5" id="summaryBackBtn">
                 ← Chỉnh sửa
               </button>
               <button class="btn-primary text-sm px-8" id="submitDateBtn">
-                Chốt kèo hẹn hò 💕
+                Chốt kèo hẹn hò 💛🐾
               </button>
             </div>
           </div>
@@ -428,34 +434,34 @@
           <!-- Step 5B: Success Screen (Shown after saving to Postgres) -->
           <div id="successSection" class="text-center relative hidden">
             <!-- Glow Rings -->
-            <div class="glow-ring glow-ring--pink"></div>
-            <div class="glow-ring glow-ring--purple"></div>
+            <div class="glow-ring glow-ring--gold"></div>
+            <div class="glow-ring glow-ring--warm"></div>
             <div class="relative z-10">
-              <div class="text-5xl md:text-6xl mb-2 heartbeat">💖</div>
+              <div class="text-5xl md:text-6xl mb-2 heartbeat">😻🎉</div>
               <h1
                 class="font-display text-4xl md:text-5xl font-bold text-white mb-2 text-shadow-glow"
               >
-                YAYYY!!!
+                YAYYY MEOWWW!!!
               </h1>
-              <p class="text-pink-300/80 text-base mb-4 font-medium">
-                ✨ Chốt kèo thành công rùiii! ✨
+              <p class="text-amber-300 text-base mb-4 font-semibold">
+                ✨ Chốt kèo thành công rùi nè chị iu! 🐾💛 ✨
               </p>
 
-              <div class="p-4 rounded-2xl bg-white/5 border border-pink-500/20 max-w-sm mx-auto mb-5 text-left text-sm space-y-2">
-                <p class="text-white/90">
-                  💌 Vé hẹn hò đã được ghi nhận cho <span class="font-bold text-pink-300" id="successEmail"></span>.
+              <div class="p-4 rounded-2xl bg-white/5 border border-amber-500/30 max-w-sm mx-auto mb-5 text-left text-sm space-y-2">
+                <p class="text-white/95">
+                  💌 Vé hẹn hò đã được ghi nhận cho <span class="font-bold text-amber-300" id="successEmail"></span>.
                 </p>
-                <p class="text-white/80">
+                <p class="text-amber-100/90">
                   📅 Hẹn gặp chị vào <span class="font-semibold text-white" id="successDateTime"></span> nha!
                 </p>
               </div>
 
               <div class="mt-4">
-                <p class="text-white/90 text-lg font-medium">
-                  Em đang háo hức chờ đến ngày đó lắm 🥰✨
+                <p class="text-amber-100 text-lg font-medium">
+                  Em đang háo hức chờ đến ngày đó lắm 🥰🐾✨
                 </p>
-                <p class="text-white/30 text-xs mt-3 italic max-w-xs mx-auto">
-                  “Normal guys send texts, i made a website.<br />I'm not like other guys xx”
+                <p class="text-amber-200/40 text-xs mt-3 italic max-w-xs mx-auto">
+                  “Normal guys send texts, i made a cute cat website.<br />I'm not like other guys xx 🐾”
                 </p>
               </div>
 

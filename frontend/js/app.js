@@ -195,11 +195,11 @@ function renderVenueSpotlight(containerEl, venueInfo) {
     `;
   } else if (venueInfo.isSurprise) {
     mediaHtml = `
-      <div class="venue-preview-img-wrapper flex items-center justify-center bg-gradient-to-br from-pink-500/20 via-purple-500/20 to-rose-500/20 text-center p-4">
+      <div class="venue-preview-img-wrapper flex items-center justify-center bg-gradient-to-br from-amber-500/20 via-yellow-500/20 to-orange-500/20 text-center p-4">
         <div>
-          <div class="text-4xl mb-1 animate-bounce-slow">🍜✨</div>
-          <div class="text-pink-200 text-sm font-bold">Địa điểm bí mật</div>
-          <div class="text-white/70 text-xs mt-1">Anh sẽ dẫn em đến quán mì cay siêu ngon!</div>
+          <div class="text-4xl mb-1 animate-bounce-slow">🍜🐾</div>
+          <div class="text-amber-200 text-sm font-bold">Địa điểm bí mật</div>
+          <div class="text-amber-100/80 text-xs mt-1">Anh sẽ dẫn em đến quán mì cay siêu ngon!</div>
         </div>
       </div>
     `;
@@ -214,8 +214,8 @@ function renderVenueSpotlight(containerEl, venueInfo) {
     `;
   } else {
     mapBtnHtml = `
-      <span class="venue-preview-map-btn cursor-default bg-pink-500/15 border-pink-500/30 text-pink-200">
-        <span>🛵</span> Anh chở em đi tận nơi nhé!
+      <span class="venue-preview-map-btn cursor-default bg-amber-500/20 border-amber-500/40 text-amber-200">
+        <span>🛵</span> Anh chở em đi tận nơi nhé, tin tưởng mèo em! 🐾
       </span>
     `;
   }
@@ -234,18 +234,18 @@ function renderVenueSpotlight(containerEl, venueInfo) {
   containerEl.classList.remove("hidden");
 }
 
-// ---------- Floating Hearts Initialization ----------
+// ---------- Floating Cat Paws & Emojis Initialization ----------
 function initFloatingHearts() {
   heartsContainer.innerHTML = "";
-  const emojis = ["❤️", "💕", "💖", "✨", "🌸", "💗", "🥰", "💌", "🐱", "☕"];
-  for (let i = 0; i < 20; i++) {
+  const emojis = ["🐾", "🐱", "💛", "✨", "🐟", "🧶", "😻", "😸", "🍮", "🐾"];
+  for (let i = 0; i < 22; i++) {
     const el = document.createElement("span");
     el.className = "heart-float";
     el.textContent = emojis[i % emojis.length];
     el.style.left = Math.random() * 100 + "%";
-    el.style.fontSize = 0.8 + Math.random() * 1.2 + "rem";
-    el.style.animationDuration = 7 + Math.random() * 10 + "s";
-    el.style.animationDelay = Math.random() * 8 + "s";
+    el.style.fontSize = 0.85 + Math.random() * 1.3 + "rem";
+    el.style.animationDuration = 7 + Math.random() * 9 + "s";
+    el.style.animationDelay = Math.random() * 7 + "s";
     heartsContainer.appendChild(el);
   }
 }
@@ -318,12 +318,12 @@ if (noBtn) {
     noClickCount++;
     noMessage.classList.remove("hidden");
     const messages = [
-      "🥺 are you sure? Nghĩ lại xíu điii chị iu... 💕",
-      "😤 Bấm YES mới đúng nè chị ơi!",
-      "💀 Không trốn thằng em này được đâu nha!",
-      "🥰 Bấm YES để đi first date thui nào!",
-      "💗 Em vẫn đang kiên trì hỏi tiếp nè...",
-      "❤️ Chỉ có 1 đáp án duy nhất là YES thui!",
+      "🥺 Meowww... chị nỡ từ chối chú mèo này saooo? Nghĩ lại xíu điii... 🐾",
+      "😾 Em xù lông bây giờ đó nha! Bấm Okii đi mèooo!",
+      "🐾 Dấu chân mèo đã khoá nút Không rồi! Bấm Okii thui chị iu!",
+      "🐱 Mèo Kiên đang nhìn chị với đôi mắt long lanh nè... 🥺✨",
+      "🧶 Bắt được chị rồi, không trốn được mèo này đâu nhó!",
+      "😻 Chốt kèo đi date với mèo em thui nào! Chỉ có 1 đáp án thui!",
     ];
     noMessage.textContent =
       messages[Math.min(noClickCount - 1, messages.length - 1)];
@@ -337,7 +337,7 @@ if (noBtn) {
       }, 600);
     }
     if (noClickCount > 5) {
-      noMessage.textContent = "💖 Thôi để em bấm YES hộ chị lun nhé! 💖";
+      noMessage.textContent = "🐾 Thôi để mèo Kiên tự động ấn Okii hộ chị lun nè! 💛";
       setTimeout(() => {
         yesBtn.click();
       }, 500);
@@ -723,16 +723,16 @@ function launchConfetti() {
   const container = confettiOverlay;
   container.innerHTML = "";
   const colors = [
-    "#ff6b9d",
-    "#ffd700",
-    "#8b5cf6",
-    "#ff4d6d",
+    "#f59e0b",
     "#fbbf24",
-    "#34d399",
-    "#f472b6",
-    "#60a5fa",
+    "#fde047",
+    "#fed7aa",
+    "#ea580c",
+    "#10b981",
+    "#f43f5e",
+    "#fef3c7",
   ];
-  const emojis = ["❤️", "💕", "✨", "🎉", "🌸", "💖", "🥳", "🎊", "🥰", "🐱", "☕"];
+  const emojis = ["🐾", "🐱", "😻", "💛", "✨", "🎉", "🐟", "🧶", "🥰", "☕", "🍮", "🐾"];
 
   for (let i = 0; i < 90; i++) {
     const piece = document.createElement("div");
